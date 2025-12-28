@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 const PROFESSIONS = [
-    { id: 'keyholder', label: 'Keyholder', desc: 'You\'re a retail manager, you\'ve trained six new hires, watched four quit mid-shift, and felt your soul leave your body during inventory. You don\'t manage a store. You preside over its slow decay.', bonus: 'Stocked and Ready', image: '/assets/professions/keyholder.png' },
-    { id: 'healer', label: 'Healer on Call', desc: 'You\'re a nurse, you\'ve resuscitated lives, rewritten charts, and emotionally regulated five people before noon. The scrubs are the only thing holding you together.', bonus: 'Tender Frequency', image: '/assets/professions/healer.png' },
-    { id: 'machine', label: 'Machine Whisperer', desc: 'You\'ve been a mechanic long enough to fix engines, transmissions, and a few hearts along the way, whether or not they knew it.', bonus: 'Mechanical Intuition', image: '/assets/professions/machine.png' },
-    { id: 'educator', label: 'Final Exam Boss', desc: 'You\'re an educator, you taught through fire drills, heartbreak, and budget cuts, shaping minds with nothing but a whiteboard and sheer force of will. You grade in red. You dream in breakthrough moments.', bonus: 'Lesson Learned', image: '/assets/professions/educator.png' },
-    { id: 'radio', label: 'Midnight Voice', desc: 'You\'re a radio host, you cracked hearts open on air and called it "curation." People still hear your voice in their emotional damage.', bonus: 'Resonant Frequency', image: '/assets/professions/radio.png' },
-    { id: 'coder', label: 'Code Gremlin', desc: 'You\'re a software engineer, you architect systems, debug reality, and automate the things people pretend aren\'t broken. Your code runs smoother than most conversations.', bonus: 'System Override', image: '/assets/professions/coder.png' },
-    { id: 'maker', label: 'DIY Entrepreneur', desc: 'You\'re an independent maker, you turned your coping mechanisms into product lines and your worst days into bestsellers. Every piece ships with craftsmanship, charisma, and zero apologies.', bonus: 'Maker\'s Yield', image: '/assets/professions/maker.png' },
-    { id: 'scholar', label: 'Open Tabs Scholar', desc: 'You\'re a student, formally, informally, perpetually. You collect questions like keepsakes, leave notes in the margins, and believe that understanding something doesn\'t always mean finishing it. You don\'t need closure, you just need Wi-Fi.', bonus: 'Overprepared', image: '/assets/professions/scholar.png' }
+    { id: 'keyholder', label: 'Keyholder', desc: 'You\'re a retail manager, you\'ve trained six new hires, watched four quit mid-shift, and felt your soul leave your body during inventory. You don\'t manage a store. You preside over its slow decay.', bonus: 'Stocked and Ready', bonusDesc: 'Start with a random helpful item.', image: '/assets/professions/keyholder.png' },
+    { id: 'healer', label: 'Healer on Call', desc: 'You\'re a nurse, you\'ve resuscitated lives, rewritten charts, and emotionally regulated five people before noon. The scrubs are the only thing holding you together.', bonus: 'Tender Frequency', bonusDesc: 'Unlocks unique dialogue options to calm others.', image: '/assets/professions/healer.png' },
+    { id: 'machine', label: 'Machine Whisperer', desc: 'You\'ve been a mechanic long enough to fix engines, transmissions, and a few hearts along the way, whether or not they knew it.', bonus: 'Mechanical Intuition', bonusDesc: 'Repair broken objects without tools.', image: '/assets/professions/machine.png' },
+    { id: 'educator', label: 'Final Exam Boss', desc: 'You\'re an educator, you taught through fire drills, heartbreak, and budget cuts, shaping minds with nothing but a whiteboard and sheer force of will. You grade in red. You dream in breakthrough moments.', bonus: 'Lesson Learned', bonusDesc: 'Gain more detailed information when examining items.', image: '/assets/professions/educator.png' },
+    { id: 'radio', label: 'Midnight Voice', desc: 'You\'re a radio host, you cracked hearts open on air and called it "curation." People still hear your voice in their emotional damage.', bonus: 'Resonant Frequency', bonusDesc: 'Hear sounds and secrets from further away.', image: '/assets/professions/radio.png' },
+    { id: 'coder', label: 'Code Gremlin', desc: 'You\'re a software engineer, you architect systems, debug reality, and automate the things people pretend aren\'t broken. Your code runs smoother than most conversations.', bonus: 'System Override', bonusDesc: 'Bypass electronic locks and terminals.', image: '/assets/professions/coder.png' },
+    { id: 'maker', label: 'DIY Entrepreneur', desc: 'You\'re an independent maker, you turned your coping mechanisms into product lines and your worst days into bestsellers. Every piece ships with craftsmanship, charisma, and zero apologies.', bonus: 'Maker\'s Yield', bonusDesc: 'Salvage useful components from broken items.', image: '/assets/professions/maker.png' },
+    { id: 'scholar', label: 'Open Tabs Scholar', desc: 'You\'re a student, formally, informally, perpetually. You collect questions like keepsakes, leave notes in the margins, and believe that understanding something doesn\'t always mean finishing it. You don\'t need closure, you just need Wi-Fi.', bonus: 'Overprepared', bonusDesc: 'Reveal hidden lore in descriptions.', image: '/assets/professions/scholar.png' }
 ];
 
 const POCKET_ITEMS = [
@@ -383,13 +383,17 @@ const CharacterCreation = ({ onComplete }) => {
                         {selectedItem?.desc}
                     </p>
                     {selectedItem?.bonus && (
-                        <div style={{
-                            marginTop: 'auto',
-                            padding: '0.75rem',
-                            background: 'rgba(0,0,0,0.3)',
-                            borderRadius: '8px',
-                            borderTop: '2px solid #f8f5e3'
-                        }}>
+                        <div
+                            title={selectedItem.bonusDesc || "Special Ability"}
+                            style={{
+                                marginTop: 'auto',
+                                padding: '0.75rem',
+                                background: 'rgba(0,0,0,0.3)',
+                                borderRadius: '8px',
+                                borderTop: '2px solid #f8f5e3',
+                                cursor: 'help'
+                            }}
+                        >
                             <div style={{
                                 fontSize: '1rem',
                                 opacity: 0.7,
@@ -421,21 +425,21 @@ const CharacterCreation = ({ onComplete }) => {
 
     const isNarrationStep = step === 2 || step === 4;
 
-    if (isNarrationStep) {
-        return (
-            <div className="scene-container character-creation" style={{
-                backgroundImage: `url('/assets/train_interior.png')`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                height: '100vh',
-                width: '100vw',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-end',
-                alignItems: 'center',
-                paddingBottom: '4rem',
-                transition: 'all 0.5s ease'
-            }}>
+    return (
+        <div className="scene-container character-creation" style={{
+            padding: '2rem',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '100vh',
+            width: '100vw',
+            backgroundImage: isNarrationStep ? `url('/assets/train_interior.png')` : 'none',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            transition: 'all 0.5s ease',
+            position: 'relative' // Needed for absolute child
+        }}>
+            {isNarrationStep ? (
                 <div style={{
                     maxWidth: '800px',
                     width: '90%',
@@ -444,7 +448,8 @@ const CharacterCreation = ({ onComplete }) => {
                     padding: '2rem',
                     boxShadow: '0 8px 0 rgba(0,0,0,0.2), 0 0 20px rgba(0,0,0,0.5)',
                     imageRendering: 'pixelated',
-                    position: 'relative',
+                    position: 'absolute',
+                    bottom: '4rem',
                     borderRadius: '15px'
                 }}>
                     <p style={{
@@ -481,262 +486,258 @@ const CharacterCreation = ({ onComplete }) => {
                         </button>
                     </div>
                 </div>
-            </div>
-        );
-    }
-
-    return (
-        <div className="scene-container character-creation" style={{ padding: '2rem', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
-            <div style={{
-                width: '100%',
-                maxWidth: '1000px', // Widened for grid
-                background: '#f8f5e3',
-                border: '4px double #2e5c2e',
-                padding: '2rem',
-                boxShadow: '0 8px 0 rgba(0,0,0,0.2), 0 0 20px rgba(0,0,0,0.5)',
-                imageRendering: 'pixelated',
-                borderRadius: '15px',
-                color: '#1a2f1a',
-                fontFamily: '"Jersey 20", sans-serif'
-            }}>
-                <h2 style={{
-                    textAlign: 'center',
-                    marginBottom: '2rem',
-                    fontSize: '2.5rem',
-                    fontFamily: '"Jersey 20", sans-serif',
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px'
+            ) : (
+                <div style={{
+                    width: '100%',
+                    maxWidth: '1000px', // Widened for grid
+                    background: '#f8f5e3',
+                    border: '4px double #2e5c2e',
+                    padding: '2rem',
+                    boxShadow: '0 8px 0 rgba(0,0,0,0.2), 0 0 20px rgba(0,0,0,0.5)',
+                    imageRendering: 'pixelated',
+                    borderRadius: '15px',
+                    color: '#1a2f1a',
+                    fontFamily: '"Jersey 20", sans-serif'
                 }}>
-                    {getTitle()}
-                </h2>
-                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                    <h2 style={{
+                        textAlign: 'center',
+                        marginBottom: '2rem',
+                        fontSize: '2.5rem',
+                        fontFamily: '"Jersey 20", sans-serif',
+                        textTransform: 'uppercase',
+                        letterSpacing: '1px'
+                    }}>
+                        {getTitle()}
+                    </h2>
+                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
 
-                    {/* Step 1: Identity & Visual Appearance */}
-                    {step === 1 && (
-                        <div style={{ display: 'flex', gap: '2rem', height: '500px' }}>
-                            {/* LEFT: Controls */}
-                            <div style={{ flex: 1, overflowY: 'auto', paddingRight: '1rem' }}>
-                                {/* Name & Pronouns */}
-                                <div style={{ marginBottom: '1.5rem' }}>
-                                    <label style={{ display: 'block', marginBottom: '0.8rem' }}>
-                                        <span style={{ display: 'block', fontSize: '1.2rem', marginBottom: '0.3rem' }}>Name</span>
-                                        <input
-                                            type="text"
-                                            name="name"
-                                            value={formData.name}
-                                            onChange={handleChange}
-                                            placeholder="Enter your name"
-                                            style={{
-                                                width: '100%',
-                                                background: 'transparent',
-                                                border: '2px solid #2e5c2e',
-                                                color: '#1a2f1a',
-                                                fontFamily: '"Jersey 20", sans-serif',
-                                                fontSize: '1.3rem',
-                                                padding: '8px',
-                                                borderRadius: '4px'
-                                            }}
-                                        />
-                                    </label>
-                                    <div style={{ display: 'flex', gap: '1rem' }}>
-                                        <label style={{ flex: 1 }}>
-                                            <span style={{ display: 'block', fontSize: '1.2rem', marginBottom: '0.3rem' }}>Body Type</span>
-                                            <select
-                                                value={formData.appearance.bodyType}
-                                                onChange={(e) => handleAppearanceChange('bodyType', e.target.value)}
+                        {/* Step 1: Identity & Visual Appearance */}
+                        {step === 1 && (
+                            <div style={{ display: 'flex', gap: '2rem', height: '500px' }}>
+                                {/* LEFT: Controls */}
+                                <div style={{ flex: 1, overflowY: 'auto', paddingRight: '1rem' }}>
+                                    {/* Name & Pronouns */}
+                                    <div style={{ marginBottom: '1.5rem' }}>
+                                        <label style={{ display: 'block', marginBottom: '0.8rem' }}>
+                                            <span style={{ display: 'block', fontSize: '1.2rem', marginBottom: '0.3rem' }}>Name</span>
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                value={formData.name}
+                                                onChange={handleChange}
+                                                placeholder="Enter your name"
                                                 style={{
                                                     width: '100%',
                                                     background: 'transparent',
                                                     border: '2px solid #2e5c2e',
                                                     color: '#1a2f1a',
                                                     fontFamily: '"Jersey 20", sans-serif',
-                                                    fontSize: '1.1rem',
+                                                    fontSize: '1.3rem',
                                                     padding: '8px',
                                                     borderRadius: '4px'
                                                 }}
-                                            >
-                                                <option value="Type 1">1</option>
-                                                <option value="Type 2">2</option>
-                                                <option value="Type 3">3</option>
-                                            </select>
+                                            />
                                         </label>
+                                        <div style={{ display: 'flex', gap: '1rem' }}>
+                                            <label style={{ flex: 1 }}>
+                                                <span style={{ display: 'block', fontSize: '1.2rem', marginBottom: '0.3rem' }}>Body Type</span>
+                                                <select
+                                                    value={formData.appearance.bodyType}
+                                                    onChange={(e) => handleAppearanceChange('bodyType', e.target.value)}
+                                                    style={{
+                                                        width: '100%',
+                                                        background: 'transparent',
+                                                        border: '2px solid #2e5c2e',
+                                                        color: '#1a2f1a',
+                                                        fontFamily: '"Jersey 20", sans-serif',
+                                                        fontSize: '1.1rem',
+                                                        padding: '8px',
+                                                        borderRadius: '4px'
+                                                    }}
+                                                >
+                                                    <option value="Type 1">1</option>
+                                                    <option value="Type 2">2</option>
+                                                    <option value="Type 3">3</option>
+                                                </select>
+                                            </label>
+                                        </div>
                                     </div>
+
+                                    {/* Skin Tone */}
+                                    <div style={{ marginBottom: '1.5rem' }}>
+                                        <span style={{ display: 'block', fontSize: '1.2rem', marginBottom: '0.5rem' }}>Skin Tone</span>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                            <input
+                                                type="color"
+                                                value={formData.appearance.skin}
+                                                onChange={(e) => handleAppearanceChange('skin', e.target.value)}
+                                                style={{
+                                                    width: '60px',
+                                                    height: '40px',
+                                                    border: '2px solid #2e5c2e',
+                                                    borderRadius: '4px',
+                                                    background: 'transparent',
+                                                    cursor: 'pointer'
+                                                }}
+                                            />
+                                            <span style={{ fontFamily: '"Jersey 20", sans-serif', fontSize: '1.2rem' }}>
+                                                {formData.appearance.skin}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    {/* Eye Color */}
+                                    <div style={{ marginBottom: '1.5rem' }}>
+                                        <span style={{ display: 'block', fontSize: '1.2rem', marginBottom: '0.5rem' }}>Eye Color</span>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                            <input
+                                                type="color"
+                                                value={formData.appearance.eyeColor}
+                                                onChange={(e) => handleAppearanceChange('eyeColor', e.target.value)}
+                                                style={{
+                                                    width: '60px',
+                                                    height: '40px',
+                                                    border: '2px solid #2e5c2e',
+                                                    borderRadius: '4px',
+                                                    background: 'transparent',
+                                                    cursor: 'pointer'
+                                                }}
+                                            />
+                                            <span style={{ fontFamily: '"Jersey 20", sans-serif', fontSize: '1.2rem' }}>
+                                                {formData.appearance.eyeColor}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    {/* Hair Color Only */}
+                                    <div style={{ marginBottom: '1.5rem' }}>
+                                        <span style={{ display: 'block', fontSize: '1.2rem', marginBottom: '0.5rem' }}>Hair Color</span>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                            <input
+                                                type="color"
+                                                value={formData.appearance.hairColor}
+                                                onChange={(e) => handleAppearanceChange('hairColor', e.target.value)}
+                                                style={{
+                                                    width: '60px',
+                                                    height: '40px',
+                                                    border: '2px solid #2e5c2e',
+                                                    borderRadius: '4px',
+                                                    background: 'transparent',
+                                                    cursor: 'pointer'
+                                                }}
+                                            />
+                                            <span style={{ fontFamily: '"Jersey 20", sans-serif', fontSize: '1.2rem' }}>
+                                                {formData.appearance.hairColor}
+                                            </span>
+                                        </div>
+                                    </div>
+
                                 </div>
 
-                                {/* Skin Tone */}
-                                <div style={{ marginBottom: '1.5rem' }}>
-                                    <span style={{ display: 'block', fontSize: '1.2rem', marginBottom: '0.5rem' }}>Skin Tone</span>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                        <input
-                                            type="color"
-                                            value={formData.appearance.skin}
-                                            onChange={(e) => handleAppearanceChange('skin', e.target.value)}
-                                            style={{
-                                                width: '60px',
-                                                height: '40px',
-                                                border: '2px solid #2e5c2e',
-                                                borderRadius: '4px',
-                                                background: 'transparent',
-                                                cursor: 'pointer'
-                                            }}
-                                        />
-                                        <span style={{ fontFamily: '"Jersey 20", sans-serif', fontSize: '1.2rem' }}>
-                                            {formData.appearance.skin}
-                                        </span>
-                                    </div>
-                                </div>
-
-                                {/* Eye Color */}
-                                <div style={{ marginBottom: '1.5rem' }}>
-                                    <span style={{ display: 'block', fontSize: '1.2rem', marginBottom: '0.5rem' }}>Eye Color</span>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                        <input
-                                            type="color"
-                                            value={formData.appearance.eyeColor}
-                                            onChange={(e) => handleAppearanceChange('eyeColor', e.target.value)}
-                                            style={{
-                                                width: '60px',
-                                                height: '40px',
-                                                border: '2px solid #2e5c2e',
-                                                borderRadius: '4px',
-                                                background: 'transparent',
-                                                cursor: 'pointer'
-                                            }}
-                                        />
-                                        <span style={{ fontFamily: '"Jersey 20", sans-serif', fontSize: '1.2rem' }}>
-                                            {formData.appearance.eyeColor}
-                                        </span>
-                                    </div>
-                                </div>
-
-                                {/* Hair Color Only */}
-                                <div style={{ marginBottom: '1.5rem' }}>
-                                    <span style={{ display: 'block', fontSize: '1.2rem', marginBottom: '0.5rem' }}>Hair Color</span>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                        <input
-                                            type="color"
-                                            value={formData.appearance.hairColor}
-                                            onChange={(e) => handleAppearanceChange('hairColor', e.target.value)}
-                                            style={{
-                                                width: '60px',
-                                                height: '40px',
-                                                border: '2px solid #2e5c2e',
-                                                borderRadius: '4px',
-                                                background: 'transparent',
-                                                cursor: 'pointer'
-                                            }}
-                                        />
-                                        <span style={{ fontFamily: '"Jersey 20", sans-serif', fontSize: '1.2rem' }}>
-                                            {formData.appearance.hairColor}
-                                        </span>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            {/* RIGHT: Live Preview */}
-                            <div style={{
-                                flex: 1,
-                                background: '#2c2c2c',
-                                borderRadius: '12px',
-                                border: '4px double #f8f5e3',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                position: 'relative',
-                                overflow: 'hidden'
-                            }}>
+                                {/* RIGHT: Live Preview */}
                                 <div style={{
-                                    width: '300px',
-                                    height: '300px',
-                                    imageRendering: 'pixelated'
+                                    flex: 1,
+                                    background: '#2c2c2c',
+                                    borderRadius: '12px',
+                                    border: '4px double #f8f5e3',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    position: 'relative',
+                                    overflow: 'hidden'
                                 }}>
-                                    <PixelAvatar
-                                        skin={formData.appearance.skin}
-                                        eyes={formData.appearance.eyeColor}
-                                        hair={formData.appearance.hairStyle}
-                                        hairColor={formData.appearance.hairColor}
-                                        outfit={formData.appearance.outfit}
-                                        bodyType={formData.appearance.bodyType}
-                                    />
-                                </div>
-                                <div style={{
-                                    position: 'absolute',
-                                    bottom: '10px',
-                                    color: '#f8f5e3',
-                                    fontFamily: '"Jersey 20", sans-serif',
-                                    fontSize: '1.5rem',
-                                    textTransform: 'uppercase'
-                                }}>
-                                    Preview
+                                    <div style={{
+                                        width: '300px',
+                                        height: '300px',
+                                        imageRendering: 'pixelated'
+                                    }}>
+                                        <PixelAvatar
+                                            skin={formData.appearance.skin}
+                                            eyes={formData.appearance.eyeColor}
+                                            hair={formData.appearance.hairStyle}
+                                            hairColor={formData.appearance.hairColor}
+                                            outfit={formData.appearance.outfit}
+                                            bodyType={formData.appearance.bodyType}
+                                        />
+                                    </div>
+                                    <div style={{
+                                        position: 'absolute',
+                                        bottom: '10px',
+                                        color: '#f8f5e3',
+                                        fontFamily: '"Jersey 20", sans-serif',
+                                        fontSize: '1.5rem',
+                                        textTransform: 'uppercase'
+                                    }}>
+                                        Preview
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )}
-
-                    {/* Step 3: Pocket Item */}
-                    {step === 3 && (
-                        <div>
-                            <SplitSelection items={POCKET_ITEMS} field="pocketItem" selectedId={formData.pocketItem} />
-                        </div>
-                    )}
-
-                    {/* Step 5: Profession */}
-                    {step === 5 && (
-                        <div>
-                            <SplitSelection items={PROFESSIONS} field="profession" selectedId={formData.profession} />
-                        </div>
-                    )}
-
-                    {/* Navigation Buttons */}
-                    <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
-
-
-                        {step < 5 ? (
-                            <button
-                                type="button"
-                                onClick={handleNext}
-                                disabled={step === 1 && !formData.name.trim()}
-                                style={{
-                                    flex: 1,
-                                    background: (step === 1 && !formData.name.trim()) ? '#888' : '#2e5c2e',
-                                    color: '#f8f5e3',
-                                    border: (step === 1 && !formData.name.trim()) ? '2px solid #666' : '2px solid #1a2f1a',
-                                    fontFamily: '"Jersey 20", sans-serif',
-                                    fontSize: '1.5rem',
-                                    padding: '12px',
-                                    cursor: (step === 1 && !formData.name.trim()) ? 'not-allowed' : 'pointer',
-                                    textTransform: 'uppercase',
-                                    boxShadow: (step === 1 && !formData.name.trim()) ? 'none' : '0 4px 0 #1a2f1a',
-                                    borderRadius: '8px',
-                                    opacity: (step === 1 && !formData.name.trim()) ? 0.6 : 1
-                                }}
-                            >
-                                Next
-                            </button>
-                        ) : (
-                            <button
-                                type="submit"
-                                style={{
-                                    flex: 1,
-                                    background: '#2e5c2e',
-                                    color: '#f8f5e3',
-                                    border: '2px solid #1a2f1a',
-                                    fontFamily: '"Jersey 20", sans-serif',
-                                    fontSize: '1.5rem',
-                                    padding: '12px',
-                                    cursor: 'pointer',
-                                    textTransform: 'uppercase',
-                                    boxShadow: '0 4px 0 #1a2f1a',
-                                    borderRadius: '8px'
-                                }}
-                            >
-                                Begin Journey
-                            </button>
                         )}
-                    </div>
-                </form>
-            </div>
+
+                        {/* Step 3: Pocket Item */}
+                        {step === 3 && (
+                            <div>
+                                <SplitSelection items={POCKET_ITEMS} field="pocketItem" selectedId={formData.pocketItem} />
+                            </div>
+                        )}
+
+                        {/* Step 5: Profession */}
+                        {step === 5 && (
+                            <div>
+                                <SplitSelection items={PROFESSIONS} field="profession" selectedId={formData.profession} />
+                            </div>
+                        )}
+
+                        {/* Navigation Buttons */}
+                        <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+
+
+                            {step < 5 ? (
+                                <button
+                                    type="button"
+                                    onClick={handleNext}
+                                    disabled={step === 1 && !formData.name.trim()}
+                                    style={{
+                                        flex: 1,
+                                        background: (step === 1 && !formData.name.trim()) ? '#888' : '#2e5c2e',
+                                        color: '#f8f5e3',
+                                        border: (step === 1 && !formData.name.trim()) ? '2px solid #666' : '2px solid #1a2f1a',
+                                        fontFamily: '"Jersey 20", sans-serif',
+                                        fontSize: '1.5rem',
+                                        padding: '12px',
+                                        cursor: (step === 1 && !formData.name.trim()) ? 'not-allowed' : 'pointer',
+                                        textTransform: 'uppercase',
+                                        boxShadow: (step === 1 && !formData.name.trim()) ? 'none' : '0 4px 0 #1a2f1a',
+                                        borderRadius: '8px',
+                                        opacity: (step === 1 && !formData.name.trim()) ? 0.6 : 1
+                                    }}
+                                >
+                                    Next
+                                </button>
+                            ) : (
+                                <button
+                                    type="submit"
+                                    style={{
+                                        flex: 1,
+                                        background: '#2e5c2e',
+                                        color: '#f8f5e3',
+                                        border: '2px solid #1a2f1a',
+                                        fontFamily: '"Jersey 20", sans-serif',
+                                        fontSize: '1.5rem',
+                                        padding: '12px',
+                                        cursor: 'pointer',
+                                        textTransform: 'uppercase',
+                                        boxShadow: '0 4px 0 #1a2f1a',
+                                        borderRadius: '8px'
+                                    }}
+                                >
+                                    This was my profession
+                                </button>
+                            )}
+                        </div>
+                    </form>
+                </div>
+            )}
         </div>
     );
 };
