@@ -21,13 +21,9 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: var(--color-bg-dark);
+  background-color: #000;
   color: var(--color-text-main);
   font-family: var(--font-family);
-  background-image:
-    radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.1) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.1) 0px, transparent 50%);
-  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -125,4 +121,19 @@ button {
   border-radius: 16px;
   padding: 2.5rem;
   box-shadow: var(--shadow);
+}
+
+/* Scene Container - Fixed width with centered background */
+.scene-container {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 20px solid #000;
+  border-radius: 10px;
+  box-sizing: border-box;
 }
