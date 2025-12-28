@@ -137,3 +137,55 @@ button {
   border-radius: 10px;
   box-sizing: border-box;
 }
+
+@keyframes pixel-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.interaction-point {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background-color: #38bdf8;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2px #1e293b,
+    /* Simulated border/outline that follows radius */
+    4px 4px 0 rgba(0, 0, 0, 0.5);
+  /* Drop shadow */
+  cursor: pointer;
+  z-index: 10;
+  image-rendering: pixelated;
+  animation: pixel-pulse 1.5s steps(4) infinite;
+}
+
+.interaction-point::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+}
+
+.interaction-point:hover {
+  background-color: #fff;
+  border-color: #38bdf8;
+  animation: none;
+  transform: translate(-50%, -50%) scale(1.2);
+}

@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 
 const PROFESSIONS = [
-    { id: 'keyholder', label: 'Keyholder', desc: 'Retail manager. Bonus: Stocked and Ready.' },
-    { id: 'healer', label: 'Healer on Call', desc: 'Nurse. Bonus: Tender Frequency.' },
-    { id: 'maker', label: 'DIY Entrepreneur', desc: 'Maker. Bonus: Maker’s Yield.' },
-    { id: 'scholar', label: 'Open Tabs Scholar', desc: 'Student. Bonus: Overprepared.' }
+    { id: 'keyholder', label: 'Keyholder', desc: 'You\'re a retail manager, you\'ve trained six new hires, watched four quit mid-shift, and felt your soul leave your body during inventory. You don\'t manage a store. You preside over its slow decay.', bonus: 'Stocked and Ready', image: '/assets/professions/keyholder.png' },
+    { id: 'healer', label: 'Healer on Call', desc: 'You\'re a nurse, you\'ve resuscitated lives, rewritten charts, and emotionally regulated five people before noon. The scrubs are the only thing holding you together.', bonus: 'Tender Frequency', image: '/assets/professions/healer.png' },
+    { id: 'machine', label: 'Machine Whisperer', desc: 'You\'ve been a mechanic long enough to fix engines, transmissions, and a few hearts along the way, whether or not they knew it.', bonus: 'Mechanical Intuition', image: '/assets/professions/machine.png' },
+    { id: 'educator', label: 'Final Exam Boss', desc: 'You\'re an educator, you taught through fire drills, heartbreak, and budget cuts, shaping minds with nothing but a whiteboard and sheer force of will. You grade in red. You dream in breakthrough moments.', bonus: 'Lesson Learned', image: '/assets/professions/educator.png' },
+    { id: 'radio', label: 'Midnight Voice', desc: 'You\'re a radio host, you cracked hearts open on air and called it "curation." People still hear your voice in their emotional damage.', bonus: 'Resonant Frequency', image: '/assets/professions/radio.png' },
+    { id: 'coder', label: 'Code Gremlin', desc: 'You\'re a software engineer, you architect systems, debug reality, and automate the things people pretend aren\'t broken. Your code runs smoother than most conversations.', bonus: 'System Override', image: '/assets/professions/coder.png' },
+    { id: 'maker', label: 'DIY Entrepreneur', desc: 'You\'re an independent maker, you turned your coping mechanisms into product lines and your worst days into bestsellers. Every piece ships with craftsmanship, charisma, and zero apologies.', bonus: 'Maker\'s Yield', image: '/assets/professions/maker.png' },
+    { id: 'scholar', label: 'Open Tabs Scholar', desc: 'You\'re a student, formally, informally, perpetually. You collect questions like keepsakes, leave notes in the margins, and believe that understanding something doesn\'t always mean finishing it. You don\'t need closure, you just need Wi-Fi.', bonus: 'Overprepared', image: '/assets/professions/scholar.png' }
 ];
 
 const POCKET_ITEMS = [
@@ -284,7 +288,7 @@ const CharacterCreation = ({ onComplete }) => {
                 display: 'grid',
                 gridTemplateColumns: '1fr 340px', // Fixed Right Column
                 gap: '2rem',
-                height: '362px', // Exact height for 3 rows of 110px + 2 gaps
+                height: '482px', // Height for 4 rows of 110px + 3 gaps (110*4 + 16*3 = 488, adjusted to 482)
                 alignItems: 'start'
             }}>
                 {/* Left Column: Fixed Grid */}
@@ -335,7 +339,7 @@ const CharacterCreation = ({ onComplete }) => {
                 {/* Right Column: Absolutely Fixed Size Card */}
                 <div style={{
                     width: '340px',
-                    height: '362px', // Matches Grid height
+                    height: '482px', // Matches Grid height
                     background: '#3a3a3a',
                     color: '#f8f5e3',
                     padding: '2rem',
@@ -350,7 +354,7 @@ const CharacterCreation = ({ onComplete }) => {
                     margin: '10px',
                     flexShrink: 0 // Prevent shrinking
                 }}>
-                    {field === 'pocketItem' && selectedItem?.image ? (
+                    {selectedItem?.image ? (
                         <img
                             src={selectedItem.image}
                             alt={selectedItem.label}
@@ -373,10 +377,34 @@ const CharacterCreation = ({ onComplete }) => {
                         fontStyle: 'italic',
                         opacity: 0.9,
                         margin: 0,
-                        padding: '0 0.5rem'
+                        padding: '0 0.5rem',
+                        marginBottom: selectedItem?.bonus ? '1rem' : 0
                     }}>
                         {selectedItem?.desc}
                     </p>
+                    {selectedItem?.bonus && (
+                        <div style={{
+                            marginTop: 'auto',
+                            padding: '0.75rem',
+                            background: 'rgba(0,0,0,0.3)',
+                            borderRadius: '8px',
+                            borderTop: '2px solid #f8f5e3'
+                        }}>
+                            <div style={{
+                                fontSize: '1rem',
+                                opacity: 0.7,
+                                marginBottom: '0.25rem'
+                            }}>Bonus Ability</div>
+                            <div style={{
+                                fontSize: '1.3rem',
+                                fontWeight: 'bold',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.5px'
+                            }}>
+                                {selectedItem.bonus}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         );
@@ -385,12 +413,77 @@ const CharacterCreation = ({ onComplete }) => {
     const getTitle = () => {
         switch (step) {
             case 1: return "How Do you look like now?";
-            case 2: return ""; // No title for narration step
             case 3: return "What is in your pocket?";
-            case 4: return "What have you become?";
+            case 5: return "What were you doing before coming here?";
             default: return "";
         }
     };
+
+    const isNarrationStep = step === 2 || step === 4;
+
+    if (isNarrationStep) {
+        return (
+            <div className="scene-container character-creation" style={{
+                backgroundImage: `url('/assets/train_interior.png')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                height: '100vh',
+                width: '100vw',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'flex-end',
+                alignItems: 'center',
+                paddingBottom: '4rem',
+                transition: 'all 0.5s ease'
+            }}>
+                <div style={{
+                    maxWidth: '800px',
+                    width: '90%',
+                    background: '#f8f5e3', // Beige white
+                    border: '4px double #2e5c2e', // Ornate green
+                    padding: '2rem',
+                    boxShadow: '0 8px 0 rgba(0,0,0,0.2), 0 0 20px rgba(0,0,0,0.5)',
+                    imageRendering: 'pixelated',
+                    position: 'relative',
+                    borderRadius: '15px'
+                }}>
+                    <p style={{
+                        fontSize: '1.6rem',
+                        lineHeight: '1.5',
+                        marginBottom: '2rem',
+                        color: '#1a2f1a', // Dark pine green text
+                        fontFamily: '"Jersey 20", sans-serif',
+                        letterSpacing: '0.5px',
+                        whiteSpace: 'pre-wrap'
+                    }}>
+                        {step === 2
+                            ? "You adjust your clothing, catching your reflection one last time. Your hand brushes something in your pocket—small, familiar, like it’s been there a while.\n\nYou hadn’t noticed it before.\n\nThere’s something in your pocket. You reach in, and see…"
+                            : "You slip the item back into your pocket, feeling its weight settle against your side.\n\nFor a moment, you think about everything you left behind. The routines, the people, the version of yourself that existed before this train ride.\n\nWhat were you doing before coming here?"
+                        }
+                    </p>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                        <button
+                            onClick={handleNext}
+                            style={{
+                                background: '#2e5c2e',
+                                color: '#f8f5e3',
+                                border: '2px solid #1a2f1a',
+                                fontFamily: '"Jersey 20", sans-serif',
+                                fontSize: '1.4rem',
+                                padding: '8px 20px',
+                                cursor: 'pointer',
+                                textTransform: 'uppercase',
+                                boxShadow: '0 4px 0 #1a2f1a',
+                                borderRadius: '8px'
+                            }}
+                        >
+                            Next
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="scene-container character-creation" style={{ padding: '2rem', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
@@ -581,23 +674,6 @@ const CharacterCreation = ({ onComplete }) => {
                         </div>
                     )}
 
-                    {/* Step 2: Intermediate Narration */}
-                    {step === 2 && (
-                        <div style={{
-                            textAlign: 'center',
-                            padding: '2rem',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: '1.5rem',
-                            fontSize: '1.4rem',
-                            lineHeight: '1.6'
-                        }}>
-                            <p>You adjust your clothing, catching your reflection one last time. Your hand brushes something in your pocket—small, familiar, like it’s been there a while.</p>
-                            <p>You hadn’t noticed it before.</p>
-                            <p style={{ fontStyle: 'italic', marginTop: '1rem', color: '#2e5c2e' }}>There’s something in your pocket. You reach in, and see…</p>
-                        </div>
-                    )}
-
                     {/* Step 3: Pocket Item */}
                     {step === 3 && (
                         <div>
@@ -605,8 +681,8 @@ const CharacterCreation = ({ onComplete }) => {
                         </div>
                     )}
 
-                    {/* Step 4: Profession */}
-                    {step === 4 && (
+                    {/* Step 5: Profession */}
+                    {step === 5 && (
                         <div>
                             <SplitSelection items={PROFESSIONS} field="profession" selectedId={formData.profession} />
                         </div>
@@ -616,7 +692,7 @@ const CharacterCreation = ({ onComplete }) => {
                     <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
 
 
-                        {step < 4 ? (
+                        {step < 5 ? (
                             <button
                                 type="button"
                                 onClick={handleNext}

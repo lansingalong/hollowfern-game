@@ -26,7 +26,7 @@ const INTRO_STEPS = [
         bg: '/assets/train_interior.png'
     },
     {
-        text: "She mentioned the asters.\n\nWhite. Blooming out of season.\n\nThe lakeside nursery your grandmother built—quiet, half-wild, full of names you never asked her to repeat.\n\nYou used to pick things for the kitchen table. She’d always pretend to be surprised.\n\nThey’re beautiful, though. Almost too much so. Verna always did have a way with that place.\n\nYou wonder if the house smells the same. If her old radio still plays that one station out of the valley. If she still had that old quilt you loved to snuggle in so much as a kid.",
+        text: "You briefly remember Rose mentioning the white asters and how they bloomed out of season.\n\nThe lakeside nursery grandma built was quiet, half-wild and full of botanical names you never asked her to repeat. You used to pick things for the kitchen table and she’d always smile warmly and tell you about what you picked. Grandma always had a way with that place.\n\nYou wonder briefly if the house smells the same. If her old radio still plays that one station out of the valley. If she still had the old quilt you loved to snuggle in so much as a kid.",
         bg: '/assets/train_interior.png'
     },
     {
@@ -165,7 +165,7 @@ const IntroSequence = ({ onComplete }) => {
                                 border: '1px solid #8b4513',
                                 color: '#8b4513',
                                 padding: '8px 16px',
-                                fontFamily: 'var(--font-main), "Inter", sans-serif',
+                                fontFamily: '"Homemade Apple", cursive',
                                 fontSize: '1.1rem',
                                 cursor: 'pointer',
                                 fontWeight: 'bold'
@@ -232,6 +232,7 @@ const IntroSequence = ({ onComplete }) => {
                         fontSize: '1.6rem',
                         lineHeight: '1.5',
                         marginBottom: '2rem',
+                        whiteSpace: 'pre-line', // Preserve newlines
                         color: '#1a2f1a', // Dark pine green text
                         fontFamily: '"Jersey 20", sans-serif',
                         letterSpacing: '0.5px'
