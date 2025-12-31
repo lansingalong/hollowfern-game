@@ -8,7 +8,7 @@ const ROOMS = {
     PORCH: {
         id: 'PORCH',
         name: 'Front Porch',
-        desc: 'Weathered, white clapboard siding with a small, wraparound porch and two mismatched rocking chairs. You spot the old planter by the back door where the spare key was tucked.',
+        desc: 'The wooden boards are gray with age. To your left, the old swing bench hangs by rusted chains. The front yard is a tangle of overgrown ivy and rhododendrons.',
         img: import.meta.env.BASE_URL + 'assets/house_exterior.png',
         connections: ['SITTING_ROOM']
     },
@@ -436,23 +436,13 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
                 outerBackground={['PORCH', 'SITTING_ROOM', 'KITCHEN', 'BEDROOM', 'HALLWAY'].includes(currentRoom.id) ? import.meta.env.BASE_URL + 'assets/wood_pattern.png' : null}
                 footerContent={(
                     <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        {currentRoom.id !== 'PORCH' ? (
-                            <TypewriterText
-                                key={currentRoom.id}
-                                text={currentRoom.desc}
-                                speed={20}
-                                forceShow={forceShowFooter}
-                                style={{ margin: '0 0 1.5rem 0', fontSize: '1.4rem', lineHeight: '1.4' }}
-                            />
-                        ) : (
-                            <TypewriterText
-                                key="porch-hint"
-                                text="The key turns in the lock—a little stiff, but familiar. Explore the porch..."
-                                speed={30}
-                                forceShow={forceShowFooter}
-                                style={{ margin: '0 0 1.5rem 0', fontSize: '1.2rem', opacity: 0.8, fontStyle: 'italic' }}
-                            />
-                        )}
+                        <TypewriterText
+                            key={currentRoom.id}
+                            text={currentRoom.desc}
+                            speed={20}
+                            forceShow={forceShowFooter}
+                            style={{ margin: '0 0 1.5rem 0', fontSize: '1.4rem', lineHeight: '1.4' }}
+                        />
 
                         <div className="navigation" style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                             {currentRoom.connections.map(destId => (
