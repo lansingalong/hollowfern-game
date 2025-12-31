@@ -474,7 +474,7 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
                         </div>
 
                         {/* Navigation Tabs (Right Side of Footer) */}
-                        <NavigationMenu
+                        {/* <NavigationMenu
                             onOpenJournal={(e) => { e.stopPropagation(); setShowJournal(true); }}
                             onToggleMap={(e) => { e.stopPropagation(); setShowMinimap(!showMinimap); }}
                             style={{
@@ -483,7 +483,7 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
                                 top: '-4px', // Lowered by 20px from -24px
                                 zIndex: 10
                             }}
-                        />
+                        /> */}
                     </div>
                 )}
             >
