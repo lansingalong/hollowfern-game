@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import GameFrame from './GameFrame';
 import TypewriterText from './TypewriterText';
+import NavigationMenu from './NavigationMenu';
 // import Journal from './Journal'; // Disabled for debugging
-// import NavigationMenu from './NavigationMenu'; // Disabled for debugging
 
 const ROOMS = {
     PORCH: {
@@ -213,7 +213,27 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
                             ))}
                         </div>
 
-                        {/* NavigationMenu DISABLED FOR DEBUGGING */}
+                        {/* Navigation Tabs (Right Side of Footer) */}
+                        <NavigationMenu
+                            onOpenJournal={(e) => {
+                                e.stopPropagation();
+                                // setShowJournal(true); 
+                                console.log("Journal clicked (Disabled)");
+                                alert("Journal disabled for testing");
+                            }}
+                            onToggleMap={(e) => {
+                                e.stopPropagation();
+                                // setShowMinimap(!showMinimap); 
+                                console.log("Map clicked (Disabled)");
+                                alert("Map disabled for testing");
+                            }}
+                            style={{
+                                position: 'absolute',
+                                right: '-85px',
+                                top: '-4px', // Lowered by 20px from -24px
+                                zIndex: 10
+                            }}
+                        />
                     </div>
                 )}
             >
@@ -241,7 +261,9 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
                             }}
                             style={{
                                 top: `${point.y}%`,
-                                left: `${point.x}%`
+                                left: `${point.x}%`,
+                                zIndex: 50, // Ensure it is above background
+                                position: 'absolute'
                             }}
                         />
                     ))}
