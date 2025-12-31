@@ -9,49 +9,49 @@ const ROOMS = {
         id: 'PORCH',
         name: 'Front Porch',
         desc: 'The wooden boards are gray with age. To your left, the old swing bench hangs by rusted chains. The front yard is a tangle of overgrown ivy and rhododendrons.',
-        img: import.meta.env.BASE_URL + 'assets/house_exterior.png',
+        img: 'assets/house_exterior.png',
         connections: ['SITTING_ROOM']
     },
     KITCHEN: {
         id: 'KITCHEN',
         name: 'Kitchen',
         desc: 'Stone tile floor, smoothed with time. Hanging bunches of dried herbs. A cast iron kettle always on the stove.',
-        img: import.meta.env.BASE_URL + 'assets/kitchen.png',
+        img: 'assets/kitchen.png',
         connections: ['SITTING_ROOM', 'BACK_NOOK']
     },
     SITTING_ROOM: {
         id: 'SITTING_ROOM',
         name: 'Sitting Room',
         desc: 'A framed black-and-white photo on the mantle. Fireplace burnt low. A velvet armchair with indentations like someone just got up.',
-        img: import.meta.env.BASE_URL + 'assets/sitting_room.png',
+        img: 'assets/sitting_room.png',
         connections: ['PORCH', 'KITCHEN', 'HALLWAY']
     },
     HALLWAY: {
         id: 'HALLWAY',
         name: 'Hallway',
         desc: 'Family photographs—some with faces faded. A window that doesn’t open but lets in long rays of light.',
-        img: import.meta.env.BASE_URL + 'assets/hallway.png',
+        img: 'assets/hallway.png',
         connections: ['SITTING_ROOM', 'BEDROOM', 'SECRET_CLOSET']
     },
     BEDROOM: {
         id: 'BEDROOM',
         name: 'Bedroom',
         desc: 'Canopy bed with layered quilts. A trunk at the foot of the bed with childhood toys.',
-        img: import.meta.env.BASE_URL + 'assets/bedroom.png',
+        img: 'assets/bedroom.png',
         connections: ['HALLWAY', 'BACK_NOOK']
     },
     BACK_NOOK: {
         id: 'BACK_NOOK',
         name: 'Back Nook / Garden Access',
         desc: 'Screen door leads to a fenced garden with stone steps and wild flowers.',
-        img: import.meta.env.BASE_URL + 'assets/garden_access.png',
+        img: 'assets/garden_access.png',
         connections: ['KITCHEN', 'BEDROOM']
     },
     SECRET_CLOSET: {
         id: 'SECRET_CLOSET',
         name: 'Hidden Closet',
         desc: 'A cramps space behind a loose panel. It smells of cedar and secrets.',
-        img: import.meta.env.BASE_URL + 'assets/closet.png',
+        img: 'assets/closet.png',
         connections: ['HALLWAY']
     }
 };
