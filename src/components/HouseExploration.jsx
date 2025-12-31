@@ -231,7 +231,9 @@ const Minimap = ({ currentRoomId, onMove, onClose }) => {
 
 const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
     // Initialize with saved room or default to PORCH
-    const [currentRoom, setCurrentRoom] = useState(initialRoom ? ROOMS[initialRoom] : ROOMS.PORCH);
+    // Initialize with saved room or default to PORCH, with safety check
+    const startRoom = (initialRoom && ROOMS[initialRoom]) ? ROOMS[initialRoom] : ROOMS.PORCH;
+    const [currentRoom, setCurrentRoom] = useState(startRoom);
     const [activeDialogue, setActiveDialogue] = useState(null);
     const [showJournal, setShowJournal] = useState(false);
     const [showMinimap, setShowMinimap] = useState(false); // Default hidden, toggled via menu
