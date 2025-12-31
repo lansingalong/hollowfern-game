@@ -113,9 +113,9 @@ const GameContainer = () => {
     const handleProfessionComplete = (profession) => {
         const newData = { ...playerData, profession: profession };
         setPlayerData(newData);
-        // Transition to the narrative house scene first
-        setCurrentScene(SCENES.HOUSE_SCENE);
-        saveGame(SCENES.HOUSE_SCENE, newData, 'PORCH');
+        // Transition directly to House Exploration (Legacy Flow restored)
+        setCurrentScene(SCENES.HOUSE);
+        saveGame(SCENES.HOUSE, newData, 'PORCH');
     };
 
     const renderScene = () => {
