@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 
-const TypewriterText = ({ text, speed = 25, style = {}, onComplete, forceShow = false }) => {
+const TypewriterText = ({ text, speed = 25, style = {}, onComplete, forceShow = false, ...props }) => {
     const [displayedText, setDisplayedText] = useState('');
     const intervalRef = useRef(null);
 
@@ -10,7 +10,7 @@ const TypewriterText = ({ text, speed = 25, style = {}, onComplete, forceShow = 
         if (forceShow) {
             setDisplayedText(text);
             clearInterval(intervalRef.current);
-            if (onComplete) onComplete();
+            // Do not call onComplete here; user can advance manually
             return;
         }
 
@@ -35,7 +35,7 @@ const TypewriterText = ({ text, speed = 25, style = {}, onComplete, forceShow = 
     }, [text, speed, forceShow, onComplete]); // Re-run if text or forceShow changes
 
     return (
-        <div style={{ position: 'relative', ...style, whiteSpace: style.whiteSpace || 'pre-line' }}>
+        <div style={{ position: 'relative', ...style, whiteSpace: style.whiteSpace || 'pre-line' }} {...props}>
             {/* Ghost Text: Reserves full layout space immediately */}
             <div style={{ visibility: 'hidden' }}>
                 {text}

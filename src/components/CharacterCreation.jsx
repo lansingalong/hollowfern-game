@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import GameFrame from './GameFrame';
 
 const PROFESSIONS = [
-    { id: 'scholar', label: 'Open Tabs Scholar', desc: 'You\'re a student, formally, informally, perpetually. You collect questions like keepsakes, leave notes in the margins, and believe that understanding something doesn\'t always mean finishing it. You don\'t need closure, you just need Wi-Fi.', bonus: 'Overprepared', bonusDesc: 'Reveal hidden lore in descriptions.', image: '/assets/professions/scholar.png' },
+    { id: 'scholar', label: 'Open Tabs Scholar', desc: 'You\'re a student, formally, informally, perpetually. You collect questions like keepsakes, leave notes in the margins, and believe that understanding something doesn\'t always mean finishing it. You don\'t need closure, you just need Wi-Fi.', bonus: 'Overprepared', bonusDesc: 'Reveal hidden lore in descriptions.', image: import.meta.env.BASE_URL + 'assets/professions/scholar.png' },
 ];
 
 const POCKET_ITEMS = [
-    { id: 'compass', label: 'Brass Compass', desc: 'A heavy brass compass that doesn\'t always point North.', image: '/assets/pocket-items/compass.png' },
+    { id: 'compass', label: 'Brass Compass', desc: 'A heavy brass compass that doesn\'t always point North.', image: import.meta.env.BASE_URL + 'assets/pocket-items/compass.png' },
 ];
 
 const PRESETS = Array.from({ length: 16 }, (_, i) => ({
     id: i + 1,
     name: `Vessel ${i + 1}`,
-    image: `/assets/character/presets/character${i + 1}.png`
+    image: `${import.meta.env.BASE_URL}assets/character/presets/character${i + 1}.png`
 }));
 
 const CharacterCreation = ({ onComplete }) => {
@@ -54,7 +54,7 @@ const CharacterCreation = ({ onComplete }) => {
     return (
         <GameFrame
             title="WHO ARE YOU?"
-            outerBackground="/assets/ui/character_creation_bg.jpg" // Set image BEHIND the frame
+            outerBackground={import.meta.env.BASE_URL + 'assets/ui/character_creation_bg.jpg'} // Set image BEHIND the frame
             viewportStyle={{ backgroundColor: '#f8f5e3' }} // Keep frame content beige
             footerHeight="100px" // Reduced footer height
             footerContent={
@@ -64,22 +64,31 @@ const CharacterCreation = ({ onComplete }) => {
                         onClick={handleComplete}
                         disabled={!formData.name.trim()}
                         style={{
-                            background: !formData.name.trim() ? '#666' : '#b55239',
-                            border: 'none',
-                            color: '#fff',
+                            background: !formData.name.trim() ? '#666' : '#2e5c2e',
+                            color: '#f8f5e3',
+                            border: !formData.name.trim() ? 'none' : '2px solid #1a2f1a',
                             fontFamily: '"Jersey 20", sans-serif',
                             fontSize: '1.4rem',
                             cursor: !formData.name.trim() ? 'not-allowed' : 'pointer',
-                            padding: '0.4rem 1.5rem', // Slightly smaller padding
-                            clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)',
-                            transition: 'all 0.2s',
-                            boxShadow: !formData.name.trim() ? 'none' : '0 4px 0 #7a3626',
-                            opacity: !formData.name.trim() ? 0.7 : 1
+                            padding: '8px 20px',
+                            textTransform: 'uppercase',
+                            boxShadow: !formData.name.trim() ? 'none' : '0 4px 0 #1a2f1a',
+                            borderRadius: '8px',
+                            opacity: !formData.name.trim() ? 0.7 : 1,
+                            transition: 'all 0.2s'
+                        }}
+                        onMouseEnter={(e) => {
+                            if (formData.name.trim()) e.target.style.transform = 'translateY(-2px)';
+                        }}
+                        onMouseLeave={(e) => {
+                            if (formData.name.trim()) e.target.style.transform = 'translateY(0)';
                         }}
                         onMouseDown={(e) => !formData.name.trim() || (e.target.style.transform = 'translateY(2px)')}
-                        onMouseUp={(e) => !formData.name.trim() || (e.target.style.transform = 'translateY(0)')}
+                        onMouseUp={(e) => {
+                            if (formData.name.trim()) e.target.style.transform = 'translateY(-2px)'; // Return to hover state
+                        }}
                     >
-                        SAVE AND NEXT
+                        THIS IS ME
                     </button>
                 </div>
             }
@@ -249,8 +258,9 @@ const CharacterCreation = ({ onComplete }) => {
                         }}>
                             <div style={{
                                 color: '#000000', // Set to black
-                                fontSize: '1.8rem',
-                                fontFamily: '"Jersey 20", sans-serif' // Consistent font
+                                fontSize: '1.4rem',
+                                fontFamily: '"Jersey 20", sans-serif', // Consistent font
+                                marginTop: '-10px'
                             }}>
                                 {PRESETS.find(p => p.id === formData.selectedPresetId)?.name || 'Unknown'}
                             </div>

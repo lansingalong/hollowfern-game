@@ -20,10 +20,10 @@ const Journal = ({ onClose }) => {
 
     const weekDates = getWeekDays();
     const weatherOptions = [
-        '/assets/weather/sun.png',
-        '/assets/weather/cloud.png',
-        '/assets/weather/rain.png',
-        '/assets/weather/storm.png'
+        import.meta.env.BASE_URL + 'assets/weather/sun.png',
+        import.meta.env.BASE_URL + 'assets/weather/cloud.png',
+        import.meta.env.BASE_URL + 'assets/weather/rain.png',
+        import.meta.env.BASE_URL + 'assets/weather/storm.png'
     ];
 
     // Generate days (memoized ideally, but this is fine for now)

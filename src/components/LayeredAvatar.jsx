@@ -69,11 +69,11 @@ const LayeredAvatar = ({ skin, eyes, hair, hairColor, outfit, bodyType }) => {
     // 1. BODY BASE
     // Assets: body_type_1.png, body_type_2.png
     const bodyFilename = getBodyFilename(bodyType);
-    const bodySrc = `/assets/character/${bodyFilename}.png`;
+    const bodySrc = `${import.meta.env.BASE_URL}assets/character/${bodyFilename}.png`;
 
     // 2. EYES
     // Assets: eyes_base.png (Generic for now)
-    const eyesSrc = `/assets/character/eyes_base.png`;
+    const eyesSrc = `${import.meta.env.BASE_URL}assets/character/eyes_base.png`;
 
     // 3. HAIR
     // Assets: hair_bob.png, hair_messy.png
@@ -90,7 +90,7 @@ const LayeredAvatar = ({ skin, eyes, hair, hairColor, outfit, bodyType }) => {
         return 'hair_messy'; // Default
     };
 
-    const hairSrc = hair === 'bald' ? null : `/assets/character/${getHairFilename(hair)}.png`;
+    const hairSrc = hair === 'bald' ? null : `${import.meta.env.BASE_URL}assets/character/${getHairFilename(hair)}.png`;
 
     return (
         <div style={{ position: 'relative', width: '100%', height: '100%' }}>

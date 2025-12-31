@@ -11,7 +11,10 @@ const GameFrame = ({
 
     footerHeight = '300px', // Default height
     enableTint = true, // New prop to toggle background tint
-    showFrame = true   // New prop to toggle dialog frame styling
+    showFrame = true,   // New prop to toggle dialog frame styling
+    footerStyle = {},   // New prop for footer styling
+    titleStyle = {},     // New prop for title styling
+    ...props
 }) => {
     return (
         <div style={{
@@ -41,7 +44,7 @@ const GameFrame = ({
             padding: '1rem',
             position: 'relative',
             overflow: 'hidden' // Prevent scrollbars from frame
-        }}>
+        }} {...props}>
             {/* Minimap Slot */}
             {showMinimap && minimapComponent && (
                 <div style={{ position: 'absolute', top: '20px', right: '20px', zIndex: 150 }}>
@@ -83,7 +86,8 @@ const GameFrame = ({
                     alignItems: 'center',
                     justifyContent: 'center',
                     borderTopLeftRadius: '6px', // Match frame radius approx
-                    borderTopRightRadius: '6px'
+                    borderTopRightRadius: '6px',
+                    ...titleStyle
                 }}>
                     <div style={{ position: 'absolute', left: '12px', width: '10px', height: '10px', backgroundColor: '#8b5a2b', boxShadow: 'inset 1px 1px 0 rgba(0,0,0,0.5)' }} />
                     <div style={{ position: 'absolute', right: '12px', width: '10px', height: '10px', backgroundColor: '#8b5a2b', boxShadow: 'inset 1px 1px 0 rgba(0,0,0,0.5)' }} />
@@ -123,7 +127,8 @@ const GameFrame = ({
                         display: 'flex',
                         flexDirection: 'column',
                         borderBottomLeftRadius: '6px', // Match frame radius approx
-                        borderBottomRightRadius: '6px'
+                        borderBottomRightRadius: '6px',
+                        ...footerStyle
                     }}>
                         {footerContent}
                     </div>

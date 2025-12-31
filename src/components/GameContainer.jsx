@@ -2,16 +2,23 @@ import React, { useState } from 'react';
 import IntroSequence from './IntroSequence';
 import CharacterCreation from './CharacterCreation';
 import TransitionNarration from './TransitionNarration';
+import PocketItemSelection from './PocketItemSelection';
+import HouseScene from './HouseScene';
+
 import HouseExploration from './HouseExploration';
 import MainMenu from './MainMenu';
+import ProfessionSelection from './ProfessionSelection';
 
 export const SCENES = {
     MENU: 'MENU',
     INTRO: 'INTRO',
     CHAR_CREATION: 'CHAR_CREATION',
     TRANSITION: 'TRANSITION',
+    POCKET_SELECTION: 'POCKET_SELECTION',
     HOUSE: 'HOUSE',
-    GARDEN: 'GARDEN'
+    GARDEN: 'GARDEN',
+    PROFESSION: 'PROFESSION',
+    HOUSE_SCENE: 'HOUSE_SCENE'
 };
 
 const GameContainer = () => {
@@ -21,28 +28,48 @@ const GameContainer = () => {
         pronouns: '',
         profession: '',
         appearance: {},
-        pocketItem: '',
-        inventory: []
+        pocketItem: null,
+        inventory: [],
+        saveTitle: ''
     });
     const [hasSave, setHasSave] = useState(false);
+    const [saveMetadata, setSaveMetadata] = useState(null);
+    const [audioSettings, setAudioSettings] = useState({
+        volume: 0.03,
+        muted: false
+    });
 
     // Check for save file on mount
     React.useEffect(() => {
         const saved = localStorage.getItem('hollowfern_save_data');
         if (saved) {
-            setHasSave(true);
+            try {
+                const parsed = JSON.parse(saved);
+                setHasSave(true);
+                setSaveMetadata({
+                    title: parsed.playerData.saveTitle || 'Untitled Journey',
+                    timestamp: parsed.timestamp || Date.now()
+                });
+            } catch (e) {
+                console.error("Failed to parse save data", e);
+            }
         }
     }, []);
 
     const saveGame = (scene, data, room = null) => {
+        const timestamp = Date.now();
         const saveData = {
             scene,
             playerData: data,
             lastRoom: room,
-            timestamp: Date.now()
+            timestamp
         };
         localStorage.setItem('hollowfern_save_data', JSON.stringify(saveData));
         setHasSave(true);
+        setSaveMetadata({
+            title: data.saveTitle || 'Untitled Journey',
+            timestamp
+        });
     };
 
     const loadGame = () => {
@@ -56,7 +83,8 @@ const GameContainer = () => {
         }
     };
 
-    const handleNewGame = () => {
+    const handleNewGame = (title = 'Untitled') => {
+        setPlayerData(prev => ({ ...prev, saveTitle: title }));
         setCurrentScene(SCENES.INTRO);
     };
 
@@ -67,12 +95,27 @@ const GameContainer = () => {
     const handleCharacterComplete = (data) => {
         const newData = { ...playerData, ...data };
         setPlayerData(newData);
-        setCurrentScene(SCENES.HOUSE);
-        saveGame(SCENES.HOUSE, newData, 'PORCH'); // Auto-save on entry
+        setCurrentScene(SCENES.TRANSITION);
+        saveGame(SCENES.TRANSITION, newData);
     };
 
     const handleTransitionComplete = () => {
-        setCurrentScene(SCENES.HOUSE);
+        setCurrentScene(SCENES.POCKET_SELECTION);
+    };
+
+    const handlePocketSelectionComplete = (item) => {
+        const newData = { ...playerData, pocketItem: item };
+        setPlayerData(newData);
+        setCurrentScene(SCENES.PROFESSION);
+        saveGame(SCENES.PROFESSION, newData);
+    };
+
+    const handleProfessionComplete = (profession) => {
+        const newData = { ...playerData, profession: profession };
+        setPlayerData(newData);
+        // Transition to the narrative house scene first
+        setCurrentScene(SCENES.HOUSE_SCENE);
+        saveGame(SCENES.HOUSE_SCENE, newData, 'PORCH');
     };
 
     const renderScene = () => {
@@ -82,13 +125,30 @@ const GameContainer = () => {
                     onNewGame={handleNewGame}
                     onLoadGame={loadGame}
                     hasSave={hasSave}
+                    saveMetadata={saveMetadata}
+                    audioSettings={audioSettings}
+                    setAudioSettings={setAudioSettings}
                 />;
             case SCENES.INTRO:
-                return <IntroSequence onComplete={handleIntroComplete} />;
+                return <IntroSequence
+                    onComplete={handleIntroComplete}
+                    audioSettings={audioSettings}
+                />;
             case SCENES.CHAR_CREATION:
                 return <CharacterCreation onComplete={handleCharacterComplete} />;
             case SCENES.TRANSITION:
                 return <TransitionNarration onComplete={handleTransitionComplete} />;
+            case SCENES.POCKET_SELECTION:
+                return <PocketItemSelection onComplete={handlePocketSelectionComplete} />;
+            case SCENES.PROFESSION:
+                return <ProfessionSelection onComplete={handleProfessionComplete} />;
+            case SCENES.HOUSE_SCENE:
+                return <HouseScene onComplete={() => {
+                    // After house narrative, go to house exploration
+                    setCurrentScene(SCENES.HOUSE);
+                    // Save progress for house exploration
+                    saveGame(SCENES.HOUSE, playerData, 'PORCH');
+                }} />;
             case SCENES.HOUSE:
                 // Pass a callback to save progress when moving rooms
                 return <HouseExploration
