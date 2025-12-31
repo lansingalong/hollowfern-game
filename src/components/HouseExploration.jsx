@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import GameFrame from './GameFrame';
 import TypewriterText from './TypewriterText';
-import NavigationMenu from './NavigationMenu';
-// import Journal from './Journal'; // Disabled for debugging
+// import NavigationMenu from './NavigationMenu'; // Component broken, using inline replacement
+import Journal from './Journal'; // Disabled for debugging
 
 const ROOMS = {
     PORCH: {
@@ -213,27 +213,71 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
                             ))}
                         </div>
 
-                        {/* Navigation Tabs (Right Side of Footer) */}
-                        <NavigationMenu
-                            onOpenJournal={(e) => {
-                                e.stopPropagation();
-                                // setShowJournal(true); 
-                                console.log("Journal clicked (Disabled)");
-                                alert("Journal disabled for testing");
-                            }}
-                            onToggleMap={(e) => {
-                                e.stopPropagation();
-                                // setShowMinimap(!showMinimap); 
-                                console.log("Map clicked (Disabled)");
-                                alert("Map disabled for testing");
-                            }}
-                            style={{
-                                position: 'absolute',
-                                right: '-85px',
-                                top: '-4px', // Lowered by 20px from -24px
-                                zIndex: 10
-                            }}
-                        />
+                        {/* Navigation Tabs (Inline Replacement) */}
+                        <div style={{
+                            position: 'absolute',
+                            right: '-85px',
+                            top: '-4px',
+                            zIndex: 10,
+                            display: 'flex',
+                            flexDirection: 'column'
+                        }} onClick={(e) => e.stopPropagation()}>
+                            {/* Journal Tab */}
+                            <div
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    // setShowJournal(true); 
+                                    console.log("Journal clicked");
+                                    alert("Journal functionality coming next!");
+                                }}
+                                style={{
+                                    background: '#4a3b2a',
+                                    border: '2px solid #f8f5e3',
+                                    color: '#f8f5e3',
+                                    width: '65px',
+                                    height: '65px',
+                                    borderRadius: '8px',
+                                    cursor: 'pointer',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    fontSize: '2rem',
+                                    marginBottom: '10px',
+                                    boxShadow: '2px 2px 5px rgba(0,0,0,0.5)'
+                                }}
+                                title="Journal"
+                            >
+                                📖
+                            </div>
+
+                            {/* Map Tab */}
+                            <div
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    // setShowMinimap(!showMinimap); 
+                                    console.log("Map clicked");
+                                    alert("Map functionality coming next!");
+                                }}
+                                style={{
+                                    background: '#4a3b2a',
+                                    border: '2px solid #f8f5e3',
+                                    color: '#f8f5e3',
+                                    width: '65px',
+                                    height: '65px',
+                                    borderRadius: '8px',
+                                    cursor: 'pointer',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    fontSize: '2rem',
+                                    marginBottom: '10px',
+                                    boxShadow: '2px 2px 5px rgba(0,0,0,0.5)'
+                                }}
+                                title="House Plan"
+                            >
+                                🗺️
+                            </div>
+                        </div>
                     </div>
                 )}
             >
