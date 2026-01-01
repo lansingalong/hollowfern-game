@@ -115,7 +115,7 @@ const GameContainer = () => {
         setPlayerData(newData);
         // Transition directly to House Exploration (Legacy Flow restored)
         setCurrentScene(SCENES.HOUSE);
-        saveGame(SCENES.HOUSE, newData, 'PORCH');
+        saveGame(SCENES.HOUSE, newData, 'ARRIVAL');
     };
 
     const renderScene = () => {
@@ -147,7 +147,7 @@ const GameContainer = () => {
                     // After house narrative, go to house exploration
                     setCurrentScene(SCENES.HOUSE);
                     // Save progress for house exploration
-                    saveGame(SCENES.HOUSE, playerData, 'PORCH');
+                    saveGame(SCENES.HOUSE, playerData, 'ARRIVAL');
                 }} />;
             case SCENES.HOUSE:
                 // Pass a callback to save progress when moving rooms

@@ -120,11 +120,12 @@ const PocketItemSelection = ({ onComplete }) => {
         >
             <div style={{
                 height: '100%',
-                display: 'grid',
-                gridTemplateColumns: 'repeat(6, 1fr)',
-                gap: '0.5rem',
-                padding: '1rem 1rem 2rem 1rem',
-                alignContent: 'center',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexWrap: 'nowrap',
+                gap: '1rem',
+                padding: '1rem 1rem 2rem 1rem', // Balanced padding
                 maxWidth: '1050px',
                 margin: '0 auto'
             }}>
@@ -135,9 +136,10 @@ const PocketItemSelection = ({ onComplete }) => {
                             key={item.id}
                             onClick={() => handleSelect(item.id)}
                             style={{
+                                width: '150px',
                                 aspectRatio: '1',
                                 background: '#fdfbf7',
-                                border: isSelected ? '3px solid #b55239' : '2px solid #a09d8f',
+                                border: isSelected ? '3px solid #b55239' : '3px solid #a09d8f',
                                 borderRadius: '8px',
                                 cursor: 'pointer',
                                 display: 'flex',
@@ -146,7 +148,7 @@ const PocketItemSelection = ({ onComplete }) => {
                                 justifyContent: 'center',
                                 padding: '0.5rem',
                                 boxShadow: isSelected ? '0 0 0 2px #b55239' : '0 2px 4px rgba(0,0,0,0.1)',
-                                transform: isSelected ? 'translateY(-2px)' : 'none',
+                                transform: 'none',
                                 transition: 'all 0.2s'
                             }}
                         >

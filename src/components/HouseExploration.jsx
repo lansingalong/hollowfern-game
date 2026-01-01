@@ -4,10 +4,16 @@ import TypewriterText from './TypewriterText';
 
 // --- DATA: ROOMS AND INTERACTION POINTS ---
 const ROOMS = {
+    ARRIVAL: {
+        id: 'ARRIVAL',
+        name: 'The Arrival',
+        desc: 'You walk along a brick pathway covered by overgrown grass and wildflowers everywhere. The house is just as you remember it. Weathered, white clapboard siding with a small, wraparound porch and two mismatched rocking chairs. Faint metallic clinks coming from the hanging wind chime, you spot the old planter by the back door where the spare key is tucked. You crouch down, brush away a few dry leaves, and lift it. The key’s right where Rose said it would be, tucked beneath the cracked saucer, cold and familiar in your hand.',
+        img: 'assets/house_arrival.jpg'
+    },
     PORCH: {
         id: 'PORCH',
         name: 'Front Porch',
-        desc: 'The wooden boards are gray with age. To your left, the old swing bench hangs by rusted chains. The front yard is a tangle of overgrown ivy and rhododendrons.',
+        desc: 'The wooden boards are gray with age. To your left, the old rocking chair carries a knitted throw. The front yard is a tangle of overgrown ivy and rhododendrons.',
         img: 'assets/house_exterior.png'
     },
     KITCHEN: {
@@ -25,7 +31,7 @@ const ROOMS = {
     HALLWAY: {
         id: 'HALLWAY',
         name: 'Hallway',
-        desc: 'Family photographs—some with faces faded. A window that doesn’t open but lets in long rays of light.',
+        desc: 'A small desk in a nook area at the end of the hallway. Seems like someone kept up with cleaning it and everything is in its place.',
         img: 'assets/hallway.png'
     },
     BEDROOM: {
@@ -36,7 +42,7 @@ const ROOMS = {
     },
     BACK_NOOK: {
         id: 'BACK_NOOK',
-        name: 'Back Nook / Garden Access',
+        name: 'Backdoor Garden Access',
         desc: 'Screen door leads to a fenced garden with stone steps and wild flowers.',
         img: 'assets/garden_access.png'
     },
@@ -45,11 +51,17 @@ const ROOMS = {
         name: 'Hidden Closet',
         desc: 'A cramps space behind a loose panel. It smells of cedar and secrets.',
         img: 'assets/closet.png'
+    },
+    MORNING: {
+        id: 'MORNING',
+        name: 'The Next Morning',
+        desc: "It's the next morning...",
+        img: 'assets/morning_sunrise.png'
     }
 };
 
 // Defined Linear Order
-const ROOM_ORDER = ['PORCH', 'KITCHEN', 'SITTING_ROOM', 'HALLWAY', 'BEDROOM', 'BACK_NOOK'];
+const ROOM_ORDER = ['ARRIVAL', 'PORCH', 'KITCHEN', 'SITTING_ROOM', 'HALLWAY', 'BEDROOM', 'BACK_NOOK'];
 
 const INTERACTIONS = {
     PORCH: [
@@ -65,21 +77,22 @@ const INTERACTIONS = {
         { id: 902, x: 86, y: 73, text: "A cast iron kettle that's always on the stove" }
     ],
     SITTING_ROOM: [
-        { id: 7, x: 50, y: 45, text: "A framed black-and-white photo of a younger Rose on the mantle." },
-        { id: 8, x: 80, y: 70, text: "A velvet armchair with a slight indentation, as if someone just left." },
+        { id: 7, x: 28, y: 15, text: "A framed black-and-white photo on the mantle: a man in uniform, young, squinting in the sun. Verna stands beside him, hand tucked into his jacket pocket." },
+        { id: 8, x: 64, y: 65, text: "A velvet armchair with a slight indentation, as if someone just left." },
         { id: 9, x: 25, y: 55, text: "The fireplace is cold now, but the smell of cedar wood remains." }
     ],
     HALLWAY: [
-        { id: 10, x: 40, y: 30, text: "A row of faded family photographs. You recognize a few faces." },
-        { id: 11, x: 90, y: 40, text: "Warm rays of light stream through the high window." }
+        { id: 10, x: 54, y: 12, text: "Family photographs. Some with faces faded but still in good condition." },
+        { id: 11, x: 21, y: 31, text: "A window that doesn’t open but lets in long rays of light." },
+        { id: 121, x: 51, y: 64, text: "A small desk with drawers full of dried ink pens and receipts for things never bought." } // New orb user requested
     ],
     BEDROOM: [
-        { id: 12, x: 50, y: 50, text: "The canopy bed is covered in layered quilts, smelling of fresh linen." },
-        { id: 13, x: 20, y: 80, text: "A heavy wooden trunk at the foot of the bed, filled with old toys." }
+        { id: 12, x: 21, y: 47, text: "Closet of old shawls, boots, and dresses with herbs tucked in the pockets" },
+        { id: 13, x: 51, y: 77, text: "A trunk at the foot of the bed with childhood toys, dried flowers, and a diary" },
+        { id: 17, x: 43, y: 51, text: "Letter from grandma to grandma.", type: 'collect' } // New collectible
     ],
     BACK_NOOK: [
-        { id: 14, x: 45, y: 35, text: "The screen door is slightly ajar, letting in a cool breeze." },
-        { id: 15, x: 70, y: 60, text: "A cluster of wild flowers peaking through the garden steps." }
+        { id: 14, x: 82, y: 15, text: "You notice a back door that's locked that leads to a larger garden area. Maybe you should check back later." }
     ],
     SECRET_CLOSET: [
         { id: 16, x: 50, y: 50, text: "The small space smells intensely of cedar and old paper." }
@@ -297,8 +310,11 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
     const [activeDialogue, setActiveDialogue] = useState(null); // Now stores the entire interaction object or null
     const [collectedItems, setCollectedItems] = useState([]);
     const [showJournal, setShowJournal] = useState(false);
+    const [showSleepDialog, setShowSleepDialog] = useState(false);
+    const [forceShowDescription, setForceShowDescription] = useState(false);
+    const [overrideRoomId, setOverrideRoomId] = useState(null);
 
-    const currentRoomId = ROOM_ORDER[currentIndex];
+    const currentRoomId = overrideRoomId || ROOM_ORDER[currentIndex];
     const currentRoom = ROOMS[currentRoomId];
     const isLastRoom = currentIndex === ROOM_ORDER.length - 1;
 
@@ -307,8 +323,14 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
         if (!isLastRoom) {
             setCurrentIndex(prev => prev + 1);
             setActiveDialogue(null);
+            setForceShowDescription(false);
         } else {
-            alert("End of current demo exploration.");
+            // "Go Back into the House" -> Return to Sitting Room and trigger Sleep Dialogue
+            const sittingRoomIndex = ROOM_ORDER.indexOf('SITTING_ROOM');
+            setCurrentIndex(sittingRoomIndex);
+            setShowSleepDialog(true);
+            setActiveDialogue(null);
+            setForceShowDescription(false);
         }
     };
 
@@ -317,10 +339,17 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
     };
 
     const handleCloseDialogue = () => {
-        if (activeDialogue && activeDialogue.type === 'collect') {
-            setCollectedItems(prev => [...prev, activeDialogue.id]);
+        if (activeDialogue) {
+            if (activeDialogue.type === 'collect') {
+                setCollectedItems(prev => [...prev, activeDialogue.id]);
+                setActiveDialogue(null);
+            } else if (activeDialogue.text === "You go to sleep for the night.") {
+                setOverrideRoomId('MORNING');
+                setActiveDialogue(null);
+            } else {
+                setActiveDialogue(null);
+            }
         }
-        setActiveDialogue(null);
     };
 
     return (
@@ -349,7 +378,7 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
                             background: '#f4f1ea',
                             border: '4px double #2e5c2e',
                             padding: '2rem',
-                            maxWidth: '500px',
+                            maxWidth: activeDialogue.img ? '800px' : '500px', // Wider if image
                             width: '90%',
                             borderRadius: '12px',
                             boxShadow: '0 10px 25px rgba(0,0,0,0.5)',
@@ -358,6 +387,20 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
                             gap: '1.5rem'
                         }}
                     >
+                        {activeDialogue.img && (
+                            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+                                <img
+                                    src={activeDialogue.img}
+                                    alt="Interaction"
+                                    style={{
+                                        maxWidth: '100%',
+                                        maxHeight: '500px', // Allow taller images
+                                        borderRadius: '8px',
+                                        boxShadow: '0 4px 6px rgba(0,0,0,0.2)'
+                                    }}
+                                />
+                            </div>
+                        )}
                         <TypewriterText
                             text={activeDialogue.text}
                             speed={15}
@@ -388,6 +431,69 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
                                 onMouseUp={(e) => e.target.style.transform = 'translateY(0)'}
                             >
                                 {activeDialogue.type === 'collect' ? 'Collect' : 'Close'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Sleep Choice Modal */}
+            {showSleepDialog && (
+                <div style={{
+                    position: 'fixed', inset: 0, zIndex: 2000,
+                    backgroundColor: 'rgba(0,0,0,0.8)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center'
+                }}>
+                    <div style={{
+                        background: '#f4f1ea',
+                        border: '4px double #2e5c2e',
+                        padding: '2rem',
+                        maxWidth: '500px',
+                        textAlign: 'center',
+                        fontFamily: '"Jersey 20", sans-serif',
+                        boxShadow: '0 0 20px rgba(0,0,0,0.5)',
+                        borderRadius: '8px'
+                    }}>
+                        <p style={{ fontSize: '1.4rem', marginBottom: '2rem', color: '#1a1a1a' }}>
+                            It’s late. You have to go to bed to meet everyone at the funeral tomorrow. Better get some rest.
+                        </p>
+                        <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
+                            <button
+                                onClick={() => {
+                                    setShowSleepDialog(false);
+                                    setActiveDialogue({ text: "You go to sleep for the night.", type: 'info' });
+                                }}
+                                style={{
+                                    padding: '10px 20px',
+                                    fontSize: '1.1rem',
+                                    fontFamily: 'inherit',
+                                    backgroundColor: '#4e342e',
+                                    color: '#f4f1ea',
+                                    border: 'none',
+                                    borderRadius: '4px',
+                                    cursor: 'pointer'
+                                }}
+                            >
+                                Sleep on the Couch
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setShowSleepDialog(false);
+                                    setActiveDialogue({ text: "You go to sleep for the night.", type: 'info' });
+                                }}
+                                style={{
+                                    padding: '10px 20px',
+                                    fontSize: '1.1rem',
+                                    fontFamily: 'inherit',
+                                    backgroundColor: '#2e5c2e',
+                                    color: '#f4f1ea',
+                                    border: 'none',
+                                    borderRadius: '4px',
+                                    cursor: 'pointer'
+                                }}
+                            >
+                                Sleep in the Bed
+
                             </button>
                         </div>
                     </div>
@@ -427,7 +533,11 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
             <GameFrame
                 title={currentRoom.name}
                 // Only show wood pattern for interior rooms if desired, or always
-                outerBackground={['PORCH', 'SITTING_ROOM', 'KITCHEN', 'BEDROOM', 'HALLWAY'].includes(currentRoomId) ? 'assets/wood_pattern.png' : null}
+                outerBackground={
+                    currentRoomId === 'MORNING'
+                        ? 'assets/morning_sunrise_pixel.png'
+                        : (['PORCH', 'SITTING_ROOM', 'KITCHEN', 'BEDROOM', 'HALLWAY'].includes(currentRoomId) ? 'assets/wood_pattern.png' : null)
+                }
                 footerContent={
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', height: '100%' }}>
                         {/* Room Description */}
@@ -436,43 +546,48 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
                                 key={currentRoomId} // Force re-type on room change
                                 text={currentRoom.desc}
                                 speed={10}
+                                forceShow={forceShowDescription}
+                                onClick={() => setForceShowDescription(true)}
                                 style={{
                                     fontFamily: '"Jersey 20", sans-serif',
                                     fontSize: '1.4rem',
                                     lineHeight: '1.4',
-                                    color: '#1a1a1a'
+                                    color: '#1a1a1a',
+                                    cursor: 'pointer'
                                 }}
                             />
                         </div>
 
                         {/* Navigation Buttons: SINGLE BUTTON NOW */}
-                        <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end', marginTop: 'auto' }}>
-                            <button
-                                onClick={handleNext}
-                                disabled={isLastRoom}
-                                style={{
-                                    background: isLastRoom ? '#666' : '#2e5c2e',
-                                    color: '#f8f5e3',
-                                    border: '2px solid #1a2f1a',
-                                    fontFamily: '"Jersey 20", sans-serif',
-                                    fontSize: '1.2rem',
-                                    padding: '8px 20px',
-                                    cursor: isLastRoom ? 'default' : 'pointer',
-                                    textTransform: 'uppercase',
-                                    boxShadow: isLastRoom ? 'none' : '0 4px 0 #1a2f1a',
-                                    borderRadius: '8px',
-                                    marginBottom: '4px',
-                                    opacity: isLastRoom ? 0.7 : 1
-                                }}
-                                onMouseDown={(e) => !isLastRoom && (e.target.style.transform = 'translateY(2px)')}
-                                onMouseUp={(e) => !isLastRoom && (e.target.style.transform = 'translateY(0)')}
-                            >
-                                {isLastRoom
-                                    ? 'End of Tour'
-                                    : (currentRoomId === 'PORCH' ? 'Enter House' : 'Explore Next Room')
-                                }
-                            </button>
-                        </div>
+                        {currentRoomId !== 'MORNING' && (
+                            <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end', marginTop: 'auto' }}>
+                                <button
+                                    onClick={handleNext}
+                                    disabled={false}
+                                    style={{
+                                        background: '#2e5c2e',
+                                        color: '#f8f5e3',
+                                        border: '2px solid #1a2f1a',
+                                        fontFamily: '"Jersey 20", sans-serif',
+                                        fontSize: '1.2rem',
+                                        padding: '8px 20px',
+                                        cursor: 'pointer',
+                                        textTransform: 'uppercase',
+                                        boxShadow: '0 4px 0 #1a2f1a',
+                                        borderRadius: '8px',
+                                        marginBottom: '4px',
+                                        opacity: 1
+                                    }}
+                                    onMouseDown={(e) => !isLastRoom && (e.target.style.transform = 'translateY(2px)')}
+                                    onMouseUp={(e) => !isLastRoom && (e.target.style.transform = 'translateY(0)')}
+                                >
+                                    {isLastRoom
+                                        ? 'Go Back into the House'
+                                        : (currentRoomId === 'ARRIVAL' ? 'Walk Up to House' : (currentRoomId === 'PORCH' ? 'Enter House' : 'Explore Next Room'))
+                                    }
+                                </button>
+                            </div>
+                        )}
                     </div>
                 }
             >
@@ -506,6 +621,7 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
                         ))}
                 </div>
             </GameFrame>
+
         </div>
     );
 };
