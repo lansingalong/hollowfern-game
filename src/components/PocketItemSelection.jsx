@@ -58,7 +58,7 @@ const PocketItemSelection = ({ onComplete }) => {
 
     return (
         <GameFrame
-            title="WHAT IS IT?"
+            title="EXAMINE OBJECT"
             outerBackground={import.meta.env.BASE_URL + 'assets/ui/character_creation_bg.jpg'}
             viewportStyle={{
                 backgroundImage: `url(${import.meta.env.BASE_URL}assets/ui/blue_pattern_bg.jpg)`,
@@ -89,17 +89,7 @@ const PocketItemSelection = ({ onComplete }) => {
                                     {selectedItem.desc}
                                 </p>
                             </div>
-                        ) : (
-                            <p style={{
-                                fontFamily: '"Jersey 20", sans-serif',
-                                fontSize: '1.2rem',
-                                color: '#666',
-                                textAlign: 'center',
-                                marginTop: '1rem'
-                            }}>
-                                Select an object to examine it...
-                            </p>
-                        )}
+                        ) : null}
                     </div>
 
 

@@ -2,42 +2,42 @@
 const PROFESSIONS = [
     {
         id: 'keyholder',
-        title: 'Keyholder',
+        title: 'Retail Manager',
         image: import.meta.env.BASE_URL + 'assets/professions/keyholder.png',
         desc: "You’re a retail manager, you’ve trained six new hires, watched four quit mid-shift, and felt your soul leave your body during inventory. You don’t manage a store, you preside over its slow decay.",
         bonus: "Stocked and Ready: Start each day with an extra resource. Insider Access: Early access to locked areas."
     },
     {
         id: 'healer',
-        title: 'Healer on Call',
+        title: 'Nurse',
         image: import.meta.env.BASE_URL + 'assets/professions/healer.png',
         desc: "You’re a nurse, you’ve resuscitated lives, rewritten charts, and emotionally regulated five people before noon. The scrubs are the only thing holding you together.",
         bonus: "Tender Frequency: Stabilize spirits faster. Restorative Touch: Healing effects linger longer."
     },
     {
         id: 'mechanic',
-        title: 'Machine Whisperer',
+        title: 'Mechanic',
         image: import.meta.env.BASE_URL + 'assets/professions/mechanic.png',
-        desc: "You’ve been a mechanic long enough to fix engines, transmissions, and a few hearts along the way—whether or not they knew it.",
+        desc: "You’ve been a mechanic long enough to fix engines, transmissions, and a few hearts along the way, whether or not they knew it.",
         bonus: "Quiet Efficiency: Fix mechanical tasks faster. Conductive Presence: Machines respond to you."
     },
     {
         id: 'teacher',
-        title: 'Final Exam Boss',
+        title: 'Educator',
         image: import.meta.env.BASE_URL + 'assets/professions/teacher.png',
-        desc: "You’re an educator, you taught through fire drills, heartbreak, and budget cuts—shaping minds with nothing but a whiteboard and sheer force of will.",
+        desc: "You’re an educator, you taught through fire drills, heartbreak, and budget cuts, shaping minds with nothing but a whiteboard and sheer force of will.",
         bonus: "Lesson Plan: Preview major choice outcomes. Marginal Wisdom: Buffs from reading."
     },
     {
         id: 'radio',
-        title: 'Midnight Voice',
+        title: 'Radio Host',
         image: import.meta.env.BASE_URL + 'assets/professions/radio.jpg',
-        desc: "You’re a radio host, you cracked hearts open on air and called it “curation.” People still hear your voice in their emotional damage.",
+        desc: "You’re a radio host. You curate moods, not just playlists. You ask good questions, let people ramble, and understand that the best conversations usually happen when no one’s trying too hard.",
         bonus: "Signal in the Static: Hear hidden messages. Magnetic Personality: Build trust faster."
     },
     {
         id: 'engineer',
-        title: 'Code Gremlin',
+        title: 'Engineer',
         image: import.meta.env.BASE_URL + 'assets/professions/engineer.png',
         desc: "You’re a software engineer, you architect systems, debug reality, and automate the things people pretend aren’t broken.",
         bonus: "Reality Fork(): Choose alternate memories. Exploit Found: Skip parts of tasks."

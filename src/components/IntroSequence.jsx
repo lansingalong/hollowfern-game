@@ -14,7 +14,7 @@ const INTRO_STEPS = [
         bg: import.meta.env.BASE_URL + 'assets/train_interior.png'
     },
     {
-        text: "You put away your phone and reach into your coat pocket. There's an envelope in there you've been meaning to open.",
+        text: "You put away your phone and reach into your coat pocket. There's a folded up piece of paper in there that you've been holding onto. It's a letter from Rose, a longtime family friend. You've read it once already. You open it up again.",
         bg: import.meta.env.BASE_URL + 'assets/train_interior.png'
     },
     {
@@ -41,7 +41,7 @@ const INTRO_STEPS = [
         bg: import.meta.env.BASE_URL + 'assets/train_interior.png'
     },
     {
-        text: "The first thing you notice is the quiet.\n\nNot silence, just quiet. The kind that settles in after something leaves, but before anything else begins.",
+        text: "It's very quiet. Not silent but quiet.",
         bg: import.meta.env.BASE_URL + 'assets/train_interior.png'
     },
     {
@@ -202,7 +202,7 @@ const IntroSequence = ({ onComplete, audioSettings }) => {
                                     borderRadius: '8px'
                                 }}
                             >
-                                Next
+                                {step === 2 ? 'Open' : 'Next'}
                             </button>
                         </div>
                     </div>
