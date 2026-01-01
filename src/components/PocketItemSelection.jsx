@@ -61,10 +61,9 @@ const PocketItemSelection = ({ onComplete }) => {
             title="EXAMINE OBJECT"
             outerBackground={import.meta.env.BASE_URL + 'assets/ui/character_creation_bg.jpg'}
             viewportStyle={{
-                backgroundImage: `url(${import.meta.env.BASE_URL}assets/ui/blue_pattern_bg.jpg)`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                boxShadow: 'inset 0 0 50px rgba(0,0,0,0.5)', // Adding some depth
+                backgroundColor: '#f8f5e3', // Match footer color for seamless look
+                // backgroundImage removed
+                boxShadow: 'inset 0 0 50px rgba(0,0,0,0.1)', // Reduced shadow intensity
                 height: '470px'
             }}
             titleStyle={{
