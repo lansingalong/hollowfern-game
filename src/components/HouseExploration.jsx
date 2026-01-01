@@ -72,7 +72,7 @@ const INTERACTIONS = {
     KITCHEN: [
         { id: 4, x: 61, y: 18, text: "An old book full of teas, tinctures, and dried petals", type: 'collect', img: 'assets/pocket-items/eye.png' },
         { id: 5, x: 9, y: 16, text: "A familiar herbal blend that you remember from childhood.", type: 'collect', img: 'assets/pocket-items/charm.png' },
-        { id: 6, x: 35, y: 80, text: "A recipe card in Verna’s handwriting", type: 'collect' },
+        { id: 6, x: 35, y: 80, text: "A handwritten recipe card", type: 'collect', img: null },
         { id: 901, x: 33, y: 26, text: "Hanging bunches of dried herbs. Some look like rosemary, mint and sage" },
         { id: 902, x: 86, y: 73, text: "A cast iron kettle that's always on the stove" }
     ],
