@@ -25,7 +25,7 @@ const TransitionNarration = ({ onComplete }) => {
                 />
             }
             footerContent={
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%', height: '100%' }}>
                     <TypewriterText
                         text={text}
                         speed={20}
@@ -38,7 +38,7 @@ const TransitionNarration = ({ onComplete }) => {
                             whiteSpace: 'pre-line'
                         }}
                     />
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'auto' }}>
                         <button
                             onClick={onComplete}
                             style={{

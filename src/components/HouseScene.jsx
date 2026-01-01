@@ -30,7 +30,7 @@ You step inside.`;
             viewportStyle={{ background: '#f8f5e3', height: '470px' }}
             footerHeight="250px"
             footerContent={
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%', height: '100%' }}>
                     <div style={{ padding: '0 1rem', fontFamily: '"Jersey 20", sans-serif', fontSize: '1.2rem', color: '#1a1a1a' }}>
                         <div style={{ textAlign: 'center', opacity: 0.6, fontSize: '0.9rem' }}>
                             (Click anywhere to skip)

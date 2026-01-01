@@ -59,7 +59,7 @@ const CharacterCreation = ({ onComplete }) => {
             footerHeight="100px" // Reduced footer height
             footerContent={
                 // Reduced bottom padding/margin by ensuring this container is tight
-                <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%', paddingBottom: '0' }}>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%', paddingBottom: '0', height: '100%', alignItems: 'flex-end' }}>
                     <button
                         onClick={handleComplete}
                         disabled={!formData.name.trim()}

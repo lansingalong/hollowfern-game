@@ -170,7 +170,7 @@ const IntroSequence = ({ onComplete, audioSettings }) => {
             footerContent={
                 // If description or letter, we render an empty div to keep the frame size/shape
                 (currentData.type === 'description' || isLetter) ? <div /> : (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%', height: '100%' }}>
                         <TypewriterText
                             key={step} // Force reset on step change
                             text={currentData.text}
@@ -186,7 +186,7 @@ const IntroSequence = ({ onComplete, audioSettings }) => {
                                 cursor: 'pointer'
                             }}
                         />
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'auto' }}>
                             <button
                                 onClick={handleNext}
                                 style={{

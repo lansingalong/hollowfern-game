@@ -141,7 +141,7 @@ const ProfessionSelection = ({ onComplete }) => {
                         )}
                     </div>
 
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '0.5rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'auto', paddingTop: '0.5rem' }}>
                         <button
                             onClick={handleConfirm}
                             disabled={!selectedId}
