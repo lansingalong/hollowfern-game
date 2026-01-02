@@ -509,42 +509,35 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
                         title="Open Journal"
                         style={{
                             position: 'absolute',
-                            right: '-42px', /* Width is now roughly 40px, adjust to stick out */
-                            top: '80px',    /* Near top of viewport, below title bar */
+                            right: '-50px', /* Adjust based on image width */
+                            top: '80px',
                             zIndex: 1000,
-                            background: '#4a3b2a', /* Match Frame Border/Title */
-                            color: '#f8f5e3',
-                            border: '2px solid #2e2620',
-                            borderLeft: 'none',
-                            borderRadius: '0 8px 8px 0',
+                            background: 'transparent',
+                            border: 'none',
                             cursor: 'pointer',
-                            fontFamily: '"Jersey 20", sans-serif',
-                            fontSize: '1.2rem',
-                            padding: '12px 8px',
-                            writingMode: 'vertical-rl', /* Vertical Text */
-                            textOrientation: 'mixed',
-                            letterSpacing: '2px',
-                            textTransform: 'uppercase',
-                            boxShadow: '4px 4px 0 rgba(0,0,0,0.3)',
-                            transition: 'all 0.2s',
+                            padding: 0,
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            height: 'auto',
-                            minHeight: '100px'
+                            transition: 'transform 0.2s',
+                            width: '60px', /* Fixed width for the image container */
+                            height: 'auto'
                         }}
-                        onMouseEnter={(e) => {
-                            e.target.style.background = '#5d4a36';
-                            e.target.style.transform = 'translateX(2px)';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.target.style.background = '#4a3b2a';
-                            e.target.style.transform = 'translateX(0)';
-                        }}
-                        onMouseDown={(e) => e.target.style.transform = 'translateX(0)'}
-                        onMouseUp={(e) => e.target.style.transform = 'translateX(2px)'}
+                        onMouseEnter={(e) => e.target.style.transform = 'scale(1.1)'}
+                        onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+                        onMouseDown={(e) => e.target.style.transform = 'scale(0.95)'}
+                        onMouseUp={(e) => e.target.style.transform = 'scale(1.1)'}
                     >
-                        JOURNAL
+                        <img
+                            src={`${import.meta.env.BASE_URL}assets/ui/journal_icon.png`}
+                            alt="Journal"
+                            style={{
+                                width: '100%',
+                                height: 'auto',
+                                imageRendering: 'pixelated',
+                                filter: 'drop-shadow(4px 4px 4px rgba(0,0,0,0.4))'
+                            }}
+                        />
                     </button>
                 }
                 title={currentRoom.name}
