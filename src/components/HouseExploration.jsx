@@ -6,7 +6,7 @@ import TypewriterText from './TypewriterText';
 const ROOMS = {
     ARRIVAL: {
         id: 'ARRIVAL',
-        name: 'The Arrival',
+        name: 'Train Station',
         desc: 'You walk along a brick pathway covered by overgrown grass and wildflowers everywhere. The house is just as you remember it. Weathered, white clapboard siding with a small, wraparound porch and two mismatched rocking chairs. Faint metallic clinks coming from the hanging wind chime, you spot the old planter by the back door where the spare key is tucked. You crouch down, brush away a few dry leaves, and lift it. The key’s right where Rose said it would be, tucked beneath the cracked saucer, cold and familiar in your hand.',
         img: 'assets/house_arrival.jpg'
     },
