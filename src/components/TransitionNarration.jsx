@@ -13,7 +13,7 @@ const TransitionNarration = ({ onComplete }) => {
             title="The Arrival"
             outerBackground={import.meta.env.BASE_URL + 'assets/forest_bg.png'}
             viewportStyle={{
-                backgroundImage: `url(${import.meta.env.BASE_URL}assets/train_interior.png)`,
+                backgroundImage: `url(${import.meta.env.BASE_URL}assets/arrival_window.png)`,
                 backgroundSize: '110% 110%',
                 backgroundPosition: 'center',
                 height: '500px'
