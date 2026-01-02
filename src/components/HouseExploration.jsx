@@ -502,53 +502,46 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
 
 
 
+
+            {/* Floating Journal Icon - Top Right (Original Fixed Position) */}
+            <button
+                onClick={() => setShowJournal(!showJournal)}
+                title="Open Journal"
+                style={{
+                    position: 'fixed',
+                    right: '25px',
+                    top: '30px',
+                    zIndex: 1000,
+                    background: '#8d6e63', // Original wood background
+                    border: '3px solid #5d4037',
+                    borderRadius: '12px',
+                    cursor: 'pointer',
+                    width: '60px',
+                    height: '60px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 4px 6px rgba(0,0,0,0.3)',
+                    transition: 'transform 0.1s, background 0.2s',
+                }}
+                onMouseEnter={(e) => e.target.style.background = '#a1887f'}
+                onMouseLeave={(e) => e.target.style.background = '#8d6e63'}
+                onMouseDown={(e) => e.target.style.transform = 'scale(0.95)'}
+                onMouseUp={(e) => e.target.style.transform = 'scale(1)'}
+            >
+                <img
+                    src={`${import.meta.env.BASE_URL}assets/ui/journal_icon.png`}
+                    alt="Journal"
+                    style={{
+                        width: '70%',
+                        height: 'auto',
+                        imageRendering: 'pixelated',
+                        filter: 'drop-shadow(0 2px 2px rgba(0,0,0,0.2))'
+                    }}
+                />
+            </button>
+
             <GameFrame
-                overlayContent={
-                    <button
-                        onClick={() => setShowJournal(!showJournal)}
-                        title="Open Journal"
-                        style={{
-                            position: 'absolute',
-                            right: '-50px',
-                            top: '80px',
-                            zIndex: 1000,
-                            background: '#4a3b2a',
-                            border: '2px solid #2e2620',
-                            borderLeft: 'none',
-                            borderRadius: '0 8px 8px 0',
-                            cursor: 'pointer',
-                            padding: '10px 8px', /* Add padding back for the tab look */
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            transition: 'all 0.2s',
-                            width: 'auto',
-                            height: 'auto',
-                            boxShadow: '4px 4px 0 rgba(0,0,0,0.3)'
-                        }}
-                        onMouseEnter={(e) => {
-                            e.target.style.background = '#5d4a36';
-                            e.target.style.transform = 'translateX(2px)';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.target.style.background = '#4a3b2a';
-                            e.target.style.transform = 'translateX(0)';
-                        }}
-                        onMouseDown={(e) => e.target.style.transform = 'translateX(0)'}
-                        onMouseUp={(e) => e.target.style.transform = 'translateX(2px)'}
-                    >
-                        <img
-                            src={`${import.meta.env.BASE_URL}assets/ui/journal_icon.png`}
-                            alt="Journal"
-                            style={{
-                                width: '100%',
-                                height: 'auto',
-                                imageRendering: 'pixelated',
-                                filter: 'drop-shadow(4px 4px 4px rgba(0,0,0,0.4))'
-                            }}
-                        />
-                    </button>
-                }
                 title={currentRoom.name}
                 // Only show wood pattern for interior rooms if desired, or always
                 outerBackground={
