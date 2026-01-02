@@ -74,7 +74,7 @@ const INTERACTIONS = {
         { id: 5, x: 9, y: 16, text: "A familiar herb blend that you remember from childhood. Looks like Hollow Chamomile, Moonmint and Mist Sage.", type: 'collect' },
         { id: 6, x: 35, y: 80, text: "A set of instructions that says:\nBrew, burn or crush: Offer to spirits to subtly shift their mood or behavior\nInfusion (Teas, waters, oils): Soothe, soften or deepen emotional connections\nSmokes (Incenses, scent trails): Influence mental state and truth-telling\nCharms (Sachets, talismans): Be more perceptive and see clues when interacting", type: 'collect' },
 
-        { id: 902, x: 86, y: 73, text: "A cast iron kettle that's always on the stove" }
+        { id: 902, x: 86, y: 73, text: "An iron kettle that's always on the stove" }
     ],
     SITTING_ROOM: [
         { id: 7, x: 28, y: 15, text: "A framed photo on the mantle: a man in uniform, young, squinting in the sun. Verna stands beside him, hand tucked into his jacket pocket." },
