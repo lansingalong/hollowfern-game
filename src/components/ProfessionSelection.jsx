@@ -25,7 +25,7 @@ const PROFESSIONS = [
         id: 'teacher',
         title: 'Educator',
         image: import.meta.env.BASE_URL + 'assets/professions/teacher.png',
-        desc: "You’re an educator, you taught through fire drills, heartbreak, and budget cuts, shaping minds with nothing but a whiteboard and sheer force of will.",
+        desc: "You’re an educator, you taught through fire drills and budget cuts, shaping minds with nothing but a whiteboard and sheer force of will.",
         bonus: "Lesson Plan: Preview major choice outcomes. Marginal Wisdom: Buffs from reading."
     },
     {
