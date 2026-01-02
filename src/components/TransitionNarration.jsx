@@ -9,6 +9,7 @@ const TransitionNarration = ({ onComplete }) => {
 
     return (
         <GameFrame
+            onClick={() => !forceShow && setForceShow(true)}
             title="The Arrival"
             outerBackground={import.meta.env.BASE_URL + 'assets/forest_bg.png'}
             viewportStyle={{
