@@ -505,9 +505,10 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
                 onClick={() => setShowJournal(!showJournal)}
                 title="Open Journal"
                 style={{
-                    position: 'absolute',
+                    position: 'fixed',
                     right: '25px',
-                    top: '80px',
+                    top: '30px',
+                    zIndex: 1000,
                     background: '#8d6e63', // Wood-like background
                     border: '3px solid #5d4037', // Darker border
                     borderRadius: '12px', // Rounded square
