@@ -538,7 +538,7 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
                             src={`${import.meta.env.BASE_URL}assets/ui/journal_icon.png`}
                             alt="Journal"
                             style={{
-                                width: '42px', /* Bigger icon */
+                                width: '46px', /* Bigger icon (was 42px) */
                                 height: 'auto',
                                 imageRendering: 'pixelated',
                                 filter: 'drop-shadow(2px 2px 2px rgba(0,0,0,0.3))'
