@@ -70,7 +70,7 @@ const INTERACTIONS = {
         { id: 3, x: 97, y: 80, text: "Crate with old fishing boots in it and bundles of firewood sticks by the door." }
     ],
     KITCHEN: [
-        { id: 4, x: 61, y: 18, text: "An ancient book full of teas, tinctures, and dried petals", type: 'collect' },
+        { id: 4, x: 61, y: 18, text: "An ancient book full of faded photographs of plants, neat ink with descriptions and pressed dried petals.", type: 'collect' },
         { id: 5, x: 9, y: 16, text: "A familiar herbal blend that you remember from childhood.", type: 'collect' },
         { id: 6, x: 35, y: 80, text: "A handwritten recipe card", type: 'collect' },
         { id: 901, x: 33, y: 26, text: "Hanging bunches of dried herbs. Some look like rosemary, mint and sage" },
