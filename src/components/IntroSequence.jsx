@@ -46,7 +46,7 @@ const INTRO_STEPS = [
     },
     {
         text: "You step onto the platform. The wooden planks give slightly beneath your boots, worn smooth by time but still solid, like something cared for and remembered. The bulletin board leans to your left, its flyers yellowed but neat. You see one for a play and a lost cat, “missing” underlined in fresh ink. Behind you, the train pulls away, metal singing into pine and fog. You briefly hear a crow call overhead.",
-        bg: import.meta.env.BASE_URL + 'assets/train_interior.png'
+        bg: import.meta.env.BASE_URL + 'assets/train_platform.png'
     },
     {
         text: "You catch your reflection in the window of the station office...muted, hazy around the edges.\n\nYou don’t look like you did back then. But you still know this face.\n\nHow do you look like now?",
