@@ -50,7 +50,7 @@ const INTRO_STEPS = [
     },
     {
         text: "You catch your reflection in the window of the station office...muted, hazy around the edges.\n\nYou don’t look like you did back then. But you still know this face.\n\nHow do you look like now?",
-        bg: import.meta.env.BASE_URL + 'assets/train_interior.png', // Transition to char creation
+        bg: import.meta.env.BASE_URL + 'assets/station_window.png', // Transition to char creation
         sfx: import.meta.env.BASE_URL + 'assets/leaves_crunch.mp3',
         stopBgAudio: true
     }
