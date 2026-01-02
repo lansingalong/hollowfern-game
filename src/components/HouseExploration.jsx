@@ -508,15 +508,15 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
                         title="Open Journal"
                         style={{
                             position: 'absolute',
-                            right: '-50px',
-                            top: '80px', /* Keep near top as preferred previously */
+                            right: '-58px', /* Push out further to minimalize overlap */
+                            top: '80px',
                             zIndex: 1000,
                             background: '#f8f5e3', /* Beige-white */
                             border: '3px solid #4a3b2a',
                             borderLeft: 'none',
                             borderRadius: '0 12px 12px 0',
                             cursor: 'pointer',
-                            padding: '12px 8px',
+                            padding: '12px 6px', /* Slightly reduced padding */
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
