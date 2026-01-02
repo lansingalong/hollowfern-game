@@ -158,7 +158,7 @@ const IntroSequence = ({ onComplete, audioSettings }) => {
                 // For non-letter steps, we handle background in the content or shared container style
                 // actually, let's keep the bg image in the style if it's not overridden by children
                 backgroundImage: `url(${currentData.bg})`,
-                backgroundSize: '110% 110%',
+                backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 position: 'relative',
                 display: 'flex',
