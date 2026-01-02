@@ -500,38 +500,40 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
                 </div>
             )}
 
-            {/* Floating Journal Icon - Top Right with Bounding Box */}
-            <button
-                onClick={() => setShowJournal(!showJournal)}
-                title="Open Journal"
-                style={{
-                    position: 'fixed',
-                    right: '25px',
-                    top: '30px',
-                    zIndex: 1000,
-                    background: '#8d6e63', // Wood-like background
-                    border: '3px solid #5d4037', // Darker border
-                    borderRadius: '12px', // Rounded square
-                    cursor: 'pointer',
-                    fontSize: '2rem',
-                    width: '60px',
-                    height: '60px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    boxShadow: '0 4px 6px rgba(0,0,0,0.3)',
-                    zIndex: 1500,
-                    transition: 'transform 0.1s, background 0.2s',
-                }}
-                onMouseEnter={(e) => e.target.style.background = '#a1887f'}
-                onMouseLeave={(e) => e.target.style.background = '#8d6e63'}
-                onMouseDown={(e) => e.target.style.transform = 'scale(0.95)'}
-                onMouseUp={(e) => e.target.style.transform = 'scale(1)'}
-            >
-                📖
-            </button>
+
 
             <GameFrame
+                overlayContent={
+                    <button
+                        onClick={() => setShowJournal(!showJournal)}
+                        title="Open Journal"
+                        style={{
+                            position: 'absolute',
+                            right: '-60px', /* Tab sticking out */
+                            top: '584px',   /* Aligned with Footer Top (60 Title + 520 Viewport + 4 Border) */
+                            zIndex: 1000,
+                            background: '#8d6e63',
+                            border: '3px solid #5d4037',
+                            borderLeft: 'none', /* Seamless attachment */
+                            borderRadius: '0 12px 12px 0', /* Tab shape */
+                            cursor: 'pointer',
+                            fontSize: '2rem',
+                            width: '60px',
+                            height: '60px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            boxShadow: '4px 4px 6px rgba(0,0,0,0.3)',
+                            transition: 'transform 0.1s, background 0.2s',
+                        }}
+                        onMouseEnter={(e) => e.target.style.background = '#a1887f'}
+                        onMouseLeave={(e) => e.target.style.background = '#8d6e63'}
+                        onMouseDown={(e) => e.target.style.transform = 'scale(0.95)'}
+                        onMouseUp={(e) => e.target.style.transform = 'scale(1)'}
+                    >
+                        📖
+                    </button>
+                }
                 title={currentRoom.name}
                 // Only show wood pattern for interior rooms if desired, or always
                 outerBackground={

@@ -133,6 +133,9 @@ const GameFrame = ({
                         {footerContent}
                     </div>
                 )}
+
+                {/* Overlay Content (Tabs, Floating Icons relative to frame) */}
+                {props.overlayContent}
             </div>
         </div>
     );
