@@ -553,6 +553,16 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
                         ? 'assets/morning_sunrise_pixel.png'
                         : (['PORCH', 'SITTING_ROOM', 'KITCHEN', 'BEDROOM', 'HALLWAY'].includes(currentRoomId) ? 'assets/wood_pattern.png' : null)
                 }
+                footerStyle={
+                    currentRoomId === 'ARRIVAL'
+                        ? {
+                            background: `url(${import.meta.env.BASE_URL}assets/ui/arrival_dialogue_bg.png)`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            imageRendering: 'pixelated'
+                        }
+                        : {}
+                }
                 footerContent={
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', height: '100%' }}>
                         {/* Room Description */}
