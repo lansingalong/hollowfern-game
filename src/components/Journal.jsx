@@ -1,24 +1,43 @@
 import React from 'react';
 
 const Journal = ({ onClose }) => {
-    // Helper to get dates for the current week (Monday start)
-    const getWeekDays = () => {
+    // Helper to get dates for the current month
+    const getCurrentMonthDays = () => {
         const curr = new Date();
-        const first = curr.getDate() - curr.getDay() + 1; // First day is Monday
-        const week = [];
+        const year = curr.getFullYear();
+        const month = curr.getMonth(); // 0-indexed
 
-        for (let i = 0; i < 7; i++) {
-            const next = new Date(curr.getTime());
-            next.setDate(first + i);
-            const dateStr = next.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-            const dateNum = next.getDate(); // Just the number
-            const dayName = next.toLocaleDateString('en-US', { weekday: 'long' });
-            week.push({ name: dayName, date: dateStr, num: dateNum });
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const firstDayObj = new Date(year, month, 1);
+        let startDay = firstDayObj.getDay(); // 0=Sun, 1=Mon...
+
+        // Adjust for Monday start (Mon=0, ... Sun=6)
+        // JS: Sun=0, Mon=1, Tue=2, Wed=3, Thu=4, Fri=5, Sat=6
+        // Target: Mon=0, Tue=1, ... Sun=6
+        const offset = startDay === 0 ? 6 : startDay - 1;
+
+        const daysArray = [];
+
+        // Add padding for start of month
+        for (let i = 0; i < offset; i++) {
+            daysArray.push({ type: 'padding', id: `pad-${i}` });
         }
-        return week;
+
+        // Add actual days
+        for (let i = 1; i <= daysInMonth; i++) {
+            daysArray.push({
+                type: 'day',
+                num: i,
+                date: new Date(year, month, i).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }),
+                name: `day-${i}`
+            });
+        }
+
+        return { days: daysArray, monthName: firstDayObj.toLocaleDateString('en-US', { month: 'long' }), year };
     };
 
-    const weekDates = getWeekDays();
+    const { days: monthDays, monthName, year } = getCurrentMonthDays();
+
     const weatherOptions = [
         'assets/weather/sun.png',
         'assets/weather/cloud.png',
@@ -26,13 +45,16 @@ const Journal = ({ onClose }) => {
         'assets/weather/storm.png'
     ];
 
-    // Generate days (memoized ideally, but this is fine for now)
-    const days = weekDates.map(d => ({
-        ...d,
-        weather: weatherOptions[Math.floor(Math.random() * weatherOptions.length)]
-    }));
+    // Generate final days list with weather
+    const days = monthDays.map(d => {
+        if (d.type === 'padding') return d;
+        return {
+            ...d,
+            weather: weatherOptions[Math.floor(Math.random() * weatherOptions.length)]
+        };
+    });
 
-    const title = `${weekDates[0].date} - ${weekDates[6].date}`;
+    const title = `${monthName} ${year}`;
 
     const [activeTab, setActiveTab] = React.useState('calendar');
 
@@ -142,41 +164,46 @@ const Journal = ({ onClose }) => {
                             ))}
 
                             {/* Day Boxes */}
-                            {days.map(day => (
-                                <div key={day.name} style={{
-                                    border: '2px solid #8b5a2b',
-                                    borderRadius: '4px',
-                                    padding: '8px',
-                                    background: 'rgba(255, 255, 255, 0.3)',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    height: '140px',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    position: 'relative'
-                                }}>
-                                    <img
-                                        src={day.weather}
-                                        alt="weather"
-                                        style={{
-                                            width: '64px',
-                                            height: '64px',
-                                            imageRendering: 'pixelated',
-                                            opacity: 0.9
-                                        }}
-                                    />
-                                    <div style={{
-                                        position: 'absolute',
-                                        bottom: '5px',
-                                        right: '8px',
-                                        fontSize: '1.4rem',
-                                        fontWeight: 'bold',
-                                        color: '#5e3a18'
+                            {days.map(day => {
+                                if (day.type === 'padding') {
+                                    return <div key={day.id} style={{ border: 'none', background: 'transparent' }} />;
+                                }
+                                return (
+                                    <div key={day.name} style={{
+                                        border: '2px solid #8b5a2b',
+                                        borderRadius: '4px',
+                                        padding: '8px',
+                                        background: 'rgba(255, 255, 255, 0.3)',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        height: '140px',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        position: 'relative'
                                     }}>
-                                        {day.num}
+                                        <img
+                                            src={day.weather}
+                                            alt="weather"
+                                            style={{
+                                                width: '64px',
+                                                height: '64px',
+                                                imageRendering: 'pixelated',
+                                                opacity: 0.9
+                                            }}
+                                        />
+                                        <div style={{
+                                            position: 'absolute',
+                                            bottom: '5px',
+                                            right: '8px',
+                                            fontSize: '1.4rem',
+                                            fontWeight: 'bold',
+                                            color: '#5e3a18'
+                                        }}>
+                                            {day.num}
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     </>
                 ) : (
