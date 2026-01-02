@@ -509,7 +509,7 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
                         style={{
                             position: 'absolute',
                             right: '-58px', /* Push out further to minimalize overlap */
-                            top: '80px',
+                            top: '584px', /* Aligned with Footer Top (60 Title + 520 Viewport + 4 Border) */
                             zIndex: 1000,
                             background: '#f8f5e3', /* Beige-white */
                             border: '3px solid #4a3b2a',
