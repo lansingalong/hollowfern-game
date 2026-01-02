@@ -9,11 +9,24 @@ const POCKET_ITEMS = [
     { id: 'compass', label: 'Brass Compass', desc: 'A heavy brass compass that doesn\'t always point North.', image: import.meta.env.BASE_URL + 'assets/pocket-items/compass.png' },
 ];
 
-const PRESETS = Array.from({ length: 16 }, (_, i) => ({
-    id: i + 1,
-    name: `Vessel ${i + 1}`,
-    image: `${import.meta.env.BASE_URL}assets/character/presets/character${i + 1}.png`
-}));
+const PRESETS = Array.from({ length: 16 }, (_, i) => {
+    const id = i + 1;
+    // Default: image and thumbnail match
+    let image = `${import.meta.env.BASE_URL}assets/character/presets/character${id}.png`;
+    let thumbnail = image;
+
+    // Override for Vessel 1
+    if (id === 1) {
+        image = `${import.meta.env.BASE_URL}assets/character/presets/character1_new.png`;
+    }
+
+    return {
+        id,
+        name: `Vessel ${id}`,
+        image,
+        thumbnail
+    };
+});
 
 const CharacterCreation = ({ onComplete }) => {
     const [formData, setFormData] = useState({
@@ -183,7 +196,7 @@ const CharacterCreation = ({ onComplete }) => {
                                     >
                                         <div style={{ width: '100%', height: '100%' }}>
                                             <img
-                                                src={preset.image}
+                                                src={preset.thumbnail}
                                                 alt={preset.name}
                                                 style={{
                                                     width: '100%',
