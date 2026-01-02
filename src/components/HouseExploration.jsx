@@ -71,7 +71,7 @@ const INTERACTIONS = {
     ],
     KITCHEN: [
         { id: 4, x: 61, y: 18, text: "An ancient book full of faded photographs of plants, neat ink with descriptions and pressed dried petals.", type: 'collect' },
-        { id: 5, x: 9, y: 16, text: "A familiar herbal blend that you remember from childhood.", type: 'collect' },
+        { id: 5, x: 9, y: 16, text: "A familiar herb blend that you remember from childhood. Looks like Hollow Chamomile, Moonmint and Mist Sage.", type: 'collect' },
         { id: 6, x: 35, y: 80, text: "A set of instructions that says:\nBrew, burn or crush: Offer to spirits to subtly shift their mood or behavior\nInfusion (Teas, waters, oils): Soothe, soften or deepen emotional connections\nSmokes (Incenses, scent trails): Influence mental state and truth-telling\nCharms (Sachets, talismans): Be more perceptive and see clues when interacting", type: 'collect' },
         { id: 901, x: 33, y: 26, text: "Hanging bunches of dried herbs. Some look like rosemary, mint and sage" },
         { id: 902, x: 86, y: 73, text: "A cast iron kettle that's always on the stove" }
