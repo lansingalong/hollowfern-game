@@ -33,7 +33,7 @@ const INTRO_STEPS = [
     },
     {
         type: 'description',
-        text: "[The train begins to slow. The platform comes into view—faded wood, pine needles in the cracks.]",
+        text: "[The train begins to slow. The platform comes into view and you see faded wood, pine needles in the cracks.]",
         bg: import.meta.env.BASE_URL + 'assets/train_interior.png'
     },
     {
