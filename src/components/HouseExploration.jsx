@@ -553,7 +553,7 @@ const HouseExploration = ({ playerData, initialRoom, onAutoSave }) => {
                         ? 'assets/morning_sunrise_pixel.png'
                         : (currentRoomId === 'ARRIVAL'
                             ? 'assets/ui/arrival_dialogue_bg.png'
-                            : (['PORCH', 'SITTING_ROOM', 'KITCHEN', 'BEDROOM', 'HALLWAY'].includes(currentRoomId) ? 'assets/wood_pattern.png' : null))
+                            : (['PORCH', 'SITTING_ROOM', 'KITCHEN', 'BEDROOM', 'HALLWAY', 'BACK_NOOK'].includes(currentRoomId) ? 'assets/wood_pattern.png' : null))
                 }
                 footerContent={
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', height: '100%' }}>
