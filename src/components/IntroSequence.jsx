@@ -277,8 +277,9 @@ const IntroSequence = ({ onComplete, audioSettings }) => {
                     border: '4px double #5c5c5c', // Steel gray double border
                     padding: '2rem',
                     boxShadow: '0 8px 0 rgba(0,0,0,0.5), 0 0 20px rgba(0,0,0,0.8)',
+                    boxShadow: '0 8px 0 rgba(0,0,0,0.5), 0 0 20px rgba(0,0,0,0.8)',
                     position: 'absolute', // Absolute positioning for overlap
-                    bottom: '-280px', // Push down to bottom of footer (300px height)
+                    top: '550px', // Anchor top edge consistently (Viewport is 520px + 30px gap)
                     left: '50%',
                     transform: 'translateX(-50%)',
                     borderRadius: '15px',
