@@ -79,7 +79,7 @@ const INTERACTIONS = {
     SITTING_ROOM: [
         { id: 7, x: 28, y: 15, text: "A framed photo on the mantle: a man in uniform, young, squinting in the sun. Verna stands beside him, hand tucked into his jacket pocket." },
         { id: 8, x: 64, y: 65, text: "A velvet armchair with a slight indentation, as if someone just left." },
-        { id: 9, x: 25, y: 55, text: "The fireplace is cold now, but the smell of cedar wood remains." }
+        { id: 9, x: 25, y: 55, text: "A low fire in the fireplace with the smell of cedar wood." }
     ],
     HALLWAY: [
         { id: 10, x: 54, y: 12, text: "Family photographs. Some with faces faded but still in good condition." },
