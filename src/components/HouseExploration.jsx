@@ -66,7 +66,7 @@ const ROOM_ORDER = ['ARRIVAL', 'PORCH', 'KITCHEN', 'SITTING_ROOM', 'HALLWAY', 'B
 const INTERACTIONS = {
     PORCH: [
         { id: 1, x: 53, y: 21, text: "Herb bundles hanging to dry under the eaves" },
-        { id: 2, x: 41, y: 53, text: "An old rocking chair with a woven throw" },
+        { id: 2, x: 41, y: 53, text: "An old rocking chair with a woven throw." },
         { id: 3, x: 97, y: 80, text: "Crate with old fishing boots in it and bundles of firewood sticks by the door." }
     ],
     KITCHEN: [
