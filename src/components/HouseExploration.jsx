@@ -77,7 +77,7 @@ const INTERACTIONS = {
         { id: 902, x: 86, y: 73, text: "A cast iron kettle that's always on the stove" }
     ],
     SITTING_ROOM: [
-        { id: 7, x: 28, y: 15, text: "A framed black-and-white photo on the mantle: a man in uniform, young, squinting in the sun. Verna stands beside him, hand tucked into his jacket pocket." },
+        { id: 7, x: 28, y: 15, text: "A framed photo on the mantle: a man in uniform, young, squinting in the sun. Verna stands beside him, hand tucked into his jacket pocket." },
         { id: 8, x: 64, y: 65, text: "A velvet armchair with a slight indentation, as if someone just left." },
         { id: 9, x: 25, y: 55, text: "The fireplace is cold now, but the smell of cedar wood remains." }
     ],
